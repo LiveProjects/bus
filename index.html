@@ -27,4 +27,41 @@
     <div>我叫cathy</div>
     <div>liooo</div>
 </body>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script>
+	$(document).ready(function(){
+		setTimeout(function(){
+			
+			var asd=Math.random()*1000;
+			
+			//console.log('123');
+			
+			var as=asd.toString();
+			/* console.log(typeof as);
+			console.log(typeof asd);
+			console.log(asd); */
+			
+			/* var j=JSON.stringify(as);
+			console.log(typeof j);
+			console.log(j); */
+			
+			/* $.ajax({
+				url:'index.php',
+				data:{
+					'a':'asdasd'
+				},
+				dataType:'json',
+				success:function(data){
+					alert(typeof data);
+					console.log(JSON.parse(data));
+				},
+				error:function(err){
+					console.log(err);
+				}
+			}) */
+			
+			setTimeout(arguments.callee,1000);
+		},1000)
+	})
+</script>	
 </html>
