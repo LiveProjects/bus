@@ -88,6 +88,7 @@ body {
   overflow: hidden;
   border: none;
   border-radius: 0 10px 0 0;
+  text-indent: 4px;
 }
 #outLine #factory {
   width: 100%;

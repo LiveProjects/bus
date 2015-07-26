@@ -10,7 +10,8 @@ window.onload=function(){
         showParklist:document.getElementById("showParklist"),
         submitbtn:document.getElementById("submitBtn"),
         manameinput:document.getElementById("name").lastElementChild,
-        manamespan:document.getElementById("name").firstElementChild
+        manamespan:document.getElementById("name").firstElementChild,
+        factory:document.getElementById("factory").firstElementChild
     };
 
 
@@ -22,7 +23,7 @@ window.onload=function(){
     gl.manameinput.addEventListener('focus',function(){
         gl.manamespan.style.top="-100%";
         gl.manamespan.style.fontSize="1.2rem";
-        gl.manamespan.style.color="black";
+        gl.manamespan.style.color="white";
         gl.manamespan.style.left="0px";
     },false);
 
@@ -33,13 +34,48 @@ window.onload=function(){
             gl.manamespan.style.left="10px";
             gl.manamespan.style.fontSize="1.4em";
             gl.manamespan.style.color="#888888";
-            console.log(123);
+            //console.log(123);
         }else if(gl.manameinput.value!=''){
-            console.log(13);
+            console.log("------find name in factory------");
+            console.log(gl.manameinput.value);
+            var data=gl.manameinput.value;
+
+
+            $.ajax({
+                url:'json.php',
+                dataType:'json',
+                Type:'POST',
+                data:{
+                    "firstname":data
+                },
+                beforeSend:function(){
+                    //console.log(13);
+                },
+                success:function(data){
+                    if(data!=''){
+                        //console.log(data[0]['FCompanyID']);
+                        var company=data[0]['FCompanyID'];
+                        gl.factory.setAttribute('disabled','disabled');
+                        gl.factory.value=company;
+                    }else{
+                        alert("没有录入请手动选取");
+                        gl.factory.removeAttribute('disabled');
+                        gl.factory.focus();
+
+                    }
+                },
+                complete:function(){
+                    console.log("OK");
+
+                }
+            });
         }
+
 
     },false);
 
+
+    /* 尝试function(xxx,successcallback,errorcallback){}*/
 
 
     parkListul.style.height=gl.height+'px';
@@ -74,7 +110,7 @@ window.onload=function(){
     		},
         	success:function(data){
 //        		alert(data.name);
-        		alert(data);
+        		//alert(data);
         	},
         	complete:function(){
         		console.log("OK");

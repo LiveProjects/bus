@@ -14,7 +14,7 @@ window.onload=function(){
     gl.manameinput.addEventListener('focus',function(){
         gl.manamespan.style.top="-100%";
         gl.manamespan.style.fontSize="1.2rem";
-        gl.manamespan.style.color="black";
+        gl.manamespan.style.color="white";
         gl.manamespan.style.left="0px";
     },false);
 
