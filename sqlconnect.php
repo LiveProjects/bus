@@ -14,4 +14,3 @@ function showMes(){
 }
 
 mysql_select_db('log',$link)or die("数据库选择失败".mysql_error());
-

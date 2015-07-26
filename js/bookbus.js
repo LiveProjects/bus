@@ -8,8 +8,39 @@ window.onload=function(){
     var gl={
         height:window.innerHeight,
         showParklist:document.getElementById("showParklist"),
-        submitbtn:document.getElementById("submitBtn")
+        submitbtn:document.getElementById("submitBtn"),
+        manameinput:document.getElementById("name").lastElementChild,
+        manamespan:document.getElementById("name").firstElementChild
     };
+
+
+    console.log(gl.manameinput.nodeName);
+    console.log(gl.manamespan.nodeName);
+    /*gl.manameinput.onfocus=function(){
+     alert(ad)
+     };*/
+    gl.manameinput.addEventListener('focus',function(){
+        gl.manamespan.style.top="-100%";
+        gl.manamespan.style.fontSize="1.2rem";
+        gl.manamespan.style.color="black";
+        gl.manamespan.style.left="0px";
+    },false);
+
+    gl.manameinput.addEventListener('blur',function(){
+        //console.log(gl.manameinput.value);
+        if(gl.manameinput.value==''){
+            gl.manamespan.style.top="0";
+            gl.manamespan.style.left="10px";
+            gl.manamespan.style.fontSize="1.4em";
+            gl.manamespan.style.color="#888888";
+            console.log(123);
+        }else if(gl.manameinput.value!=''){
+            console.log(13);
+        }
+
+    },false);
+
+
 
     parkListul.style.height=gl.height+'px';
 
@@ -25,12 +56,53 @@ window.onload=function(){
     document.onclick=function(){
         parkList.removeAttribute('class','showlist');
     };
+    var as=1234;
     gl.submitbtn.onclick=function(e){
-        e.stopPropagation();
+    	e.stopPropagation();
         e.cancelBubble=true;
-
+//        alert('098098');
+        $.ajax({
+        	url:'json.php',
+        	dataType:'json',
+        	Type:'POST',
+        	data:{
+        		"name":"123",
+        		"age":"qwe"
+        	},
+        	beforeSend:function(){
+    			//console.log(13);
+    		},
+        	success:function(data){
+//        		alert(data.name);
+        		alert(data);
+        	},
+        	complete:function(){
+        		console.log("OK");
+        	}
+        })
+        
     };
-    //创建ajax对象函数
+    
+/*    
+    
+    	$.ajax({
+    		url:'bookbus.php',
+    		data:{'name':123},
+    		dataType:'json',
+    		Type:'get', 
+    		beforeSend:function(){
+    			alert(13);
+    		},
+    		success:function(data){
+    			alert(data);
+    		},
+    		error:function(err){
+    			console.log(err)
+    		}
+    	})
+    });*/
+
+    /*//创建ajax对象函数
     function createLink(){//函数声明
         if(window.ActiveXObject){
             var newRequest = new ActiveXObject("Microsoft.XMLHTTP");
@@ -39,61 +111,51 @@ window.onload=function(){
         }
         return newRequest;
     };
+    gl.submitbtn.onclick=function(e){
+        e.stopPropagation();
+        e.cancelBubble=true;
 
-    //发送请求
-    var http_request = createLink();//创建一个ajax对象
-    if(http_request){
-        var url;
-        http_request.open("post",url,true);
-        http_request.setRequestHeader("content-type","application/x-www-form-urlencoded");
-
-        //指定一个函数来处理从服务器返回的结果
-        http_request.onreadystatechange = dealresult; //此函数不要括号,当状态发生变化时触发函数,相当于->
-//        http_request.onreadystatechange=function(){
-//            dealresult();
-//        };
         //发送请求
-        http_request.send(data);
-        http_request.timeout(2000);
-        http_request.ontimeout=function(){
-            alert("请检查网络,重新提交");
-        }
-    };
+        var http_request = createLink();//创建一个ajax对象
+        if(http_request){
+            var url='bookbus.php';
+            var arr=[{qwe:'asd',asd:'123'}];
+            var data=arr;
+            http_request.open("post",url,true);
+            http_request.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            
 
-    //处理返回结果
-    function dealresult(){
-        console.log(http_request.readyState);
-        if (http_request.readyState!=4) {
-            console.log('还未返回正确结果');
+            //指定一个函数来处理从服务器返回的结果
+            http_request.onreadystatechange = dealresult; //此函数不要括号,当状态发生变化时触发函数,相当于->
+	        http_request.onreadystatechange=function(){
+	            dealresult();
+	        };
+            //发送请求
+            http_request.send(data);
+        };
 
-        }else if(http_request.readyState==4){
-            //等于200表示成功
-            $("#ajax").hide();
-            clearInterval("load");
-            if(http_request.status==200){
-                if(http_request.responseText=="no"){
-                    $("#suggest_ul").hide(0);
-                    return;
+        //处理返回结果
+        function dealresult(){
+            console.log(http_request.readyState);
+            if (http_request.readyState!=4) {
+                console.log('还未返回正确结果');
+
+            }else if(http_request.readyState==4){
+                //等于200表示成功
+                clearInterval("load");
+                if(http_request.status==200){
+                    if(http_request.responseText=="no"){
+                        $("#suggest_ul").hide(0);
+                        return;
+                    }
+                    var res = eval("("+http_request.responseText+")");
 
                 }
-                $("#suggest_ul").show(0);
-                //alert(http_request.responseText);
-                var res = eval("("+http_request.responseText+")");
-                //alert(http_request.responseText);
-                var contents="";
-                for(var i=0;i<res.length;i++){
-                    var keywords = res[i].keywords;
-                    //alert(skey);
-                    contents=contents+"<li class='suggest_li"+(i+1)+"'>"+keywords+"</li>";
-                }
-                //alert(contents);
-                $("#suggest_ul").html(contents);
-                //$("#suggest_ulk").empty();
-                //$("#suggest_ulk").append(contents);
             }
         }
-    }
 
+    };
+*/
 
 
 

@@ -10,13 +10,14 @@ class DB {
 	}
 	// 连接数据库
 	public function connect() {
-		$this->conn = mysql_connect ( $this->severname, 'root', 'YES' ) or die ( print_r ( mysql_error (), true ) );
+		$this->conn = mysql_connect ( $this->severname, 'root', '' ) or die ( print_r ( mysql_error (), true ) );
 		mysql_query ( "set names 'utf8'" ); // 数据库输出编码
 		$selectdb = mysql_select_db ( 'book', $this->conn ); // 打开数据库
 		if (! $selectdb) {
 			echo mysql_errno ( $this->conn );
 		}
 	}
+	
 	// 执行sql语句
 	public function query($sql) {
 		! empty ( $sql ) ? $this->sql = $sql : die ( "The sql cannot be empty!" );
