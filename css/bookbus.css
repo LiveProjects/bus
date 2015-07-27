@@ -118,6 +118,15 @@ body {
   background-color: white;
   border-radius: 6px 6px 0 0;
   font-weight: bold;
+  position: relative;
+}
+#outLine #adddate span b {
+  position: absolute;
+  left: 120%;
+  top: 0;
+  font-size: 1.3rem;
+  color: white;
+  text-align: left;
 }
 #outLine #adddate ul {
   width: 100%;
@@ -151,6 +160,16 @@ body {
   background-color: white;
   border-radius: 6px 6px 0 0;
   font-weight: bold;
+  position: relative;
+}
+#outLine #addtime span b {
+  position: absolute;
+  left: 120%;
+  top: 0;
+  font-size: 1.3rem;
+  text-align: left;
+  width: 100px;
+  color: white;
 }
 #outLine #addtime ul {
   width: 100%;
@@ -184,6 +203,16 @@ body {
   background-color: white;
   border-radius: 6px 6px 0 0;
   font-weight: bold;
+  position: relative;
+}
+#outLine #park span b {
+  position: absolute;
+  width: 100px;
+  left: 120%;
+  top: 0;
+  font-size: 1.3rem;
+  color: white;
+  text-align: left;
 }
 #outLine #park ol {
   width: 100%;

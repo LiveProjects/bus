@@ -11,7 +11,7 @@
 	
 	$name=$_POST['username'];
 
-	echo $_POST['name'];
+	/* echo $_POST['name']; */
 	
 	
 	
