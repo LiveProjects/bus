@@ -9,25 +9,40 @@ $sql_name = "select a.FName as employee, b.FName as company from t_hs_employee a
 $result_name = $db->getrow ( $sql_name );
 echo $result_name ['employee'];
 echo $result_name ['company'];
-/**
- * ****************预约查看*********************
- */
-$sql_check = "select * from t_hs_overwork_reserv where FEmployeeID='{$openid}' and FRDate>='{$from}'";
-$result_check = $db->execsql ( $sql_check );
-$num = count ( $result_check );
-if ($num) {
-	for($i = 0; $i < $num; $i ++) {
-		$sql_state = "select FName from  t_hs_stop where FID='{$result_check[$i]['FStopID']}'";
-		$result_state = $db->getrow ( $sql_state );
-		// print_r($result_state);
-		$result_check [$i] ['FStopID'] = $result_state ['FName'];
-		print_r ( $result_check [$i] );
-	}
-} else {
-	echo "无预约记录";
-}
 $act = $_GET ['act'];
-if ($act == 'modify') {
+if ($act == 'check') {
+	/**
+	 * ****************预约查看*********************
+	 */
+	
+	/*
+	 * ajax({
+	 * url:busmanage.php?act='check',
+	 * dataType:,
+	 * Type:,
+	 * data:{},
+	 *
+	 * });
+	 *
+	 */
+	$sql_check = "select * from t_hs_overwork_reserv where FEmployeeID='{$openid}' and FRDate>='{$from}'";
+	$result_check = $db->execsql ( $sql_check );
+	$num = count ( $result_check );
+	if ($num) {
+		for($i = 0; $i < $num; $i ++) {
+			$sql_state = "select FName from  t_hs_stop where FID='{$result_check[$i]['FStopID']}'";
+			$result_state = $db->getrow ( $sql_state );
+			// print_r($result_state);
+			$result_check [$i] ['FStopID'] = $result_state ['FName'];
+			print_r ( $result_check [$i] );
+		}
+	} else {
+		echo "无预约记录";
+	}
+	var_dump($result_check);
+	$checkjson=json_encode($result_check);
+	echo $checkjson;
+} elseif ($act == 'modify') {
 	/**
 	 * *****************预约修改******************
 	 */
