@@ -68,22 +68,23 @@ window.onload=function(){
                 li.appendChild(text);
                 li.style.backgroundColor=gl.randomcolor()[colorSE];
                 gl.addtimefragment.appendChild(li);
-
         	});
+            gl.addtimeUl.appendChild(gl.addtimefragment);
+
+
             /* 添加加班日期*/
             var whichDay=gl.whichDay.toString().substr(0,2);
             var whichDayrel;
             switch (whichDay){
                 case 'Mo':gl.makeday(1);break;
                 case 'Tu':gl.makeday(2);break;
-                case 'Tu':gl.makeday(2);break;
-                case 'Tu':gl.makeday(2);break;
-                case 'Tu':gl.makeday(2);break;
-                case 'Tu':gl.makeday(2);break;
-                case 'Tu':gl.makeday(2);break;
+                case 'We':gl.makeday(3);break;
+                case 'Tu':gl.makeday(4);break;
+                case 'Tu':gl.makeday(5);break;
+                case 'Tu':gl.makeday(6);break;
+                case 'Tu':gl.makeday(7);break;
                 default :break;
             }
-            gl.addtimeUl.appendChild(gl.addtimefragment);
 
             /* 添加班车下车地点 */
             var spot=data['addBS'];
@@ -99,8 +100,14 @@ window.onload=function(){
 
             /* 设置用户常用下车地点*/
             //alert(spot[0]['FName']);
+            //测试
+            function tr(){
+                for(var i=0;i<3;i++){
+                    localStorage.removeItem('usually'+i);
+                }
+            }
             (function () {
-                if(!localStorage.setItem){
+                if(!localStorage.getItem('usually0')){
                     localStorage.setItem('usually0',spot[0]['FName']);
                     localStorage.setItem('usually1',spot[1]['FName']);
                     localStorage.setItem('usually2',spot[2]['FName']);
@@ -260,10 +267,11 @@ window.onload=function(){
         	},
         	beforeSend:function(){
     			//这里确定一遍数据
-                alert(123);
+                alert("确定一遍数据");
     		},
         	success:function(data){
                 console.log(data);
+
         	},
         	complete:function(){
         		console.log("OK");

@@ -1,5 +1,4 @@
 <?php
-	require 'sqlconnect.php';
 	require 'dbaccess.php';
 	//error_reporting(0);
 	$DB=new DB();

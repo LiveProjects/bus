@@ -13,25 +13,36 @@
     <h2>班车修改</h2>
 </div>
 <div id="outwrap">
-    <div id="fixname">
-        <span>姓名</span>
-        <input type="text" placeholder=""/>
+
+    <div id="fixdate">
+        <span>加班日期
+            <b id="adddateval">123</b>
+        </span>
+        <ul></ul>
     </div>
 
     <div id="fixtime">
-        <span>加班时间</span>
-        <input type="text" placeholder=""/>
+        <span>加班时间
+            <b id="addtimeval">123</b>
+        </span>
+        <ul></ul>
     </div>
 
-    <div id="fixdate">
-        <span>加班日期</span>
-        <input type="text" placeholder=""/>
+    <div id="fixname">
+        <span>下车地点
+            <b id="parkval">123</b>
+        </span>
+        <ol></ol>
     </div>
-
+    <div id="parkList">
+        <ul id="parkListul"></ul>
+    </div>
     <button id="submitBtn">提交</button>
 
 </div>
 
 </body>
+<script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/fixBus.js"></script>
+
 </html>
