@@ -109,7 +109,7 @@ window.onload=function(){
             Type:'POST',
             dataType:'json',
             data:{
-
+            		//姓名+加班日期
             },
             success:function(data){
 
@@ -125,6 +125,7 @@ window.onload=function(){
         sessionStorage.setItem('name','lio');
         alert(sessionStorage.getItem('name'));
         location.href="fixBus.html";
+        //姓名+加班日期
     })
 
 

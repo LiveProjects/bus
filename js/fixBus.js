@@ -192,6 +192,7 @@ window.onload=function(){
             url:'',
             dataType:'json',
             Type:'POST',
+            //三个值
             success:function(data){
                 alert(data);
             },
