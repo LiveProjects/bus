@@ -51,7 +51,7 @@ window.onload=function(){
     /********加载初始化的数据*******************************/
 
     $.ajax({
-        url:'json.php',
+        url:'bookbus.php',
         dataType:'json',
         Type:'POST',
         success:function(data){
