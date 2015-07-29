@@ -19,6 +19,10 @@ window.onload=function(){
         addtimeUl:document.getElementById("addtime").lastElementChild,
         parkOl:document.getElementById("park").lastElementChild,
         parkListul:document.getElementById("parkListul"),
+        upname:document.getElementById("name").lastElementChild,
+        upadddateval:document.getElementById("adddateval"),
+        upaddtimeval:document.getElementById("addtimeval"),
+        upparkval:document.getElementById("parkval"),
         whichDay:new Date(),
         randomcolor:function(){
             var arr=['#843534','#66512c','#FF8F00','#c1e2b3'];
@@ -42,6 +46,7 @@ window.onload=function(){
 
 
 
+    
 
     /********加载初始化的数据*******************************/
 
@@ -253,18 +258,20 @@ window.onload=function(){
     //var as=1234;
     /*提交预订数据*/
     gl.submitbtn.onclick=function(e){
-
+    	
+alert(gl.upadddateval.innerHTML);
     	e.stopPropagation();
         e.cancelBubble=true;
+        
         $.ajax({
         	url:'asnycData/book_commit.php',
         	dataType:'',
         	Type:'POST',
         	data:{
-                "name_employee":"lio",
-                "FRDate":"2015-8-1 00:00:00",//加班日期
-                "FRTime":"7:30",//加班时间
-                "FStop":"清江路"//下车站点
+                "name_employee":gl.upname.value,
+                "FRDate":gl.upadddateval.innerHTML,//加班日期
+                "FRTime":gl.upaddtimeval.innerHTML,//加班时间
+                "FStop":gl.upparkval.innerHTML//下车站点
                 /*,
                 'addtime':'',
                 'adddate':''*/
