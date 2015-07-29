@@ -201,6 +201,8 @@ window.onload=function(){
             dataType:'json',
             Type:'POST',
             data:{
+                //四个值:姓名，加班日期、时间、下车地点
+                'fixname':sessionStorage.getItem('name'),
                 'fixdate':gl.downadddate.innerText,
                 'fixtime':gl.downaddtime.innerText,
                 'fixpark':gl.downaddpark.innerText
