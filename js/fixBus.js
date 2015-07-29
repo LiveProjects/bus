@@ -9,6 +9,10 @@ window.onload=function(){
         parkOl:document.getElementById("fixname").lastElementChild,
         parkListul:document.getElementById("parkListul"),
         needname:sessionStorage.getItem('name'),
+        downadddate:document.getElementById("adddateval"),
+        downaddtime:document.getElementById("addtimeval"),
+        downaddpark:document.getElementById("parkval"),
+        subfixbtn:document.getElementById("submitBtn"),
         randomcolor:function(){
             var arr=['#843534','#66512c','#FF8F00','#c1e2b3'];
             return arr;
@@ -34,8 +38,15 @@ window.onload=function(){
     (function(){
         parkListul.style.height=gl.height+'px';
     })();
-    /********加载初始化的数据*******************************/
+    /*********初始化个人数据********************************/
+    (function(){
+        gl.downadddate.innerHTML=sessionStorage.getItem('fixdate');
+        gl.downaddtime.innerText=sessionStorage.getItem('fixtime');
+        gl.downaddpark.innerText=sessionStorage.getItem('fixadd');
+    })();
 
+
+    /********加载初始化的数据*******************************/
     $.ajax({
         url:'json.php',
         dataType:'json',
@@ -115,10 +126,10 @@ window.onload=function(){
             case 'Mo':gl.makeday(1);break;
             case 'Tu':gl.makeday(2);break;
             case 'We':gl.makeday(3);break;
-            case 'Tu':gl.makeday(4);break;
-            case 'Tu':gl.makeday(5);break;
-            case 'Tu':gl.makeday(6);break;
-            case 'Tu':gl.makeday(7);break;
+            case 'Th':gl.makeday(4);break;
+            case 'Fr':gl.makeday(5);break;
+            case 'Sa':gl.makeday(6);break;
+            case 'Su':gl.makeday(7);break;
             default :break;
         }
 
@@ -182,6 +193,29 @@ window.onload=function(){
         parkList.removeAttribute('class','showlist');
     };
 
+    /**********提交修改数据************************/
+
+    gl.subfixbtn.onclick=function(){
+        $.ajax({
+            url:'',
+            dataType:'json',
+            Type:'POST',
+            data:{
+                'fixdate':gl.downadddate.innerText,
+                'fixtime':gl.downaddtime.innerText,
+                'fixpark':gl.downaddpark.innerText
+            },
+            beforeSend:function(){
+                alert("---提交的数据为------"+gl.downadddate.innerText+gl.downaddtime.innerText+gl.downaddpark.innerText)
+            },
+            success:function(data){
+                alert(data);
+            },
+            error:function(err){
+                alert("请检查网络是否连接");
+            }
+        })
+    };
 
 
 

@@ -4,18 +4,22 @@
 window.onload=function(){
     var gl={
         manameinput:document.getElementById("maname").lastElementChild,
-        manamespan:document.getElementById("maname").firstElementChild
+        manamespan:document.getElementById("maname").firstElementChild,
+        upname:document.getElementById("maname").lastElementChild.value
     };
     console.log(gl.manameinput.nodeName);
     console.log(gl.manamespan.nodeName);
     /*gl.manameinput.onfocus=function(){
         alert(ad)
     };*/
+    if(gl.manameinput.value!=""){
+        gl.manamespan.style.cssText="top:-100%;font-size:1.2rem;color:white;left:2px;";
+    }
     gl.manameinput.addEventListener('focus',function(){
         gl.manamespan.style.top="-100%";
         gl.manamespan.style.fontSize="1.2rem";
         gl.manamespan.style.color="white";
-        gl.manamespan.style.left="0px";
+        gl.manamespan.style.left="2px";
     },false);
 
     gl.manameinput.addEventListener('blur',function(){
@@ -65,7 +69,7 @@ window.onload=function(){
         //发送请求
         var http_request = createLink();//创建一个ajax对象
         if(http_request){
-            var url='bookbus.php';
+            var url='json.php';
             var arr=[{qwe:'asd',asd:'123'}];
             var data=arr;
             http_request.open("post",url,true);
@@ -102,14 +106,20 @@ window.onload=function(){
     })();
 
     /*删除数据*/
+
     $("#mainShow").find("b.de").find("button").click(function(){
         var that=$(this);
         $.ajax({
-            url:'',
+            url:'managementBus.php?act=DEL',
             Type:'POST',
             dataType:'json',
+            beforeSend:function(){
+                alert("要删除的日期是"+that.parent().parent().prev().find("div:last-child").find("p").text());
+            },
             data:{
             		//姓名+加班日期
+                'name':'lio',
+                'FID':that.parent().parent().prev().find("div:last-child").find("p").text()
             },
             success:function(data){
 
@@ -122,11 +132,27 @@ window.onload=function(){
     });
     /*修改数据*/
     $("#mainShow").find("b.de").next().find('button').click(function(){
-        sessionStorage.setItem('name','lio');
-        alert(sessionStorage.getItem('name'));
-        location.href="fixBus.html";
+        /*确定用户数据*/
         //姓名+加班日期
-    })
+        sessionStorage.setItem('name','lio');
+        sessionStorage.setItem('date',$(this).parent().parent().prev().find("div:last-child").find("p").text());
+        alert("临时数据为"+sessionStorage.getItem('name')+sessionStorage.getItem('date'));
+
+        /*初始填充值*/
+        sessionStorage.setItem('fixdate',$(this).parent().parent().prev().find("div:last-child").find("p").text());
+        sessionStorage.setItem('fixtime',$(this).parent().parent().prev().find("div:first-child").find("p").text());
+        sessionStorage.setItem('fixadd',$(this).parent().parent().parent().children("div").find("input").val());
+
+        alert("初始化的数据为:"+sessionStorage.getItem('fixdate')+sessionStorage.getItem('fixtime')+sessionStorage.getItem('fixadd'));
 
 
+
+        location.href="fixBus.html";
+
+    });
+
+
+
+    /*for layout*/
+    document.getElementById("maname").lastElementChild.style.textIndent="10px";
 };
