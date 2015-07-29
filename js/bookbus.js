@@ -51,7 +51,7 @@ window.onload=function(){
     /********加载初始化的数据*******************************/
 
     $.ajax({
-        url:'bookbus.php',
+        url:'json.php',
         dataType:'json',
         Type:'POST',
         success:function(data){
@@ -268,13 +268,14 @@ alert(gl.upadddateval.innerHTML);
         	dataType:'',
         	Type:'POST',
         	data:{
-                "name_employee":gl.upname.value,
+               "name_employee":gl.upname.value,
                 "FRDate":gl.upadddateval.innerHTML,//加班日期
                 "FRTime":gl.upaddtimeval.innerHTML,//加班时间
                 "FStop":gl.upparkval.innerHTML//下车站点
                 /*,
                 'addtime':'',
                 'adddate':''*/
+//        		'name':123
         	},
         	beforeSend:function(){
     			//这里确定一遍数据
@@ -282,6 +283,14 @@ alert(gl.upadddateval.innerHTML);
     		},
         	success:function(data){
                 console.log(data);
+                if(data==1){
+                	alert("预约成功");
+                }else if(data==2){
+                	alert("请检查空项");
+                }else{
+                	alert("预约失败，请联系技术支持");
+                }
+                
 
         	},
         	complete:function(){
