@@ -10,7 +10,7 @@ class DB {
 	}
 	// 连接数据库
 	public function connect() {
-		$this->conn = mysql_connect ( $this->severname, 'root', '' ) or die ( print_r ( mysql_error (), true ) );
+		$this->conn = mysql_connect ( $this->severname, 'root', 'YES' ) or die ( print_r ( mysql_error (), true ) );
 		mysql_query ( "set names 'utf8'" ); // 数据库输出编码
 		$selectdb = mysql_select_db ( 'book', $this->conn ); // 打开数据库
 		if (! $selectdb) {
@@ -62,6 +62,21 @@ class DB {
 		$this->query ( $sql );
 		$row = mysql_fetch_array ( $this->result, MYSQL_ASSOC );
 		return $row;
+	}
+	public function insert($table, $array) {
+		$keys = join ( ",", array_keys ( $array ) ); // 获取传过来的键名
+		$vals = "'" . join ( "','", array_values ( $array ) ) . "'"; // 获取传过来的值
+		$sql = "INSERT INTO {$table}({$keys}) VALUES ({$vals})";
+// 		echo $sql;
+		$stmt=mysql_query ( $sql,$this->conn );
+		if ($stmt){
+			return true;
+			
+		}else {
+			
+			return false;
+			
+		}
 	}
 }	
 	

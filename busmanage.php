@@ -81,7 +81,6 @@ if ($act == 'check') {
 	if ($reslut_mod) {
 		echo 1; // 修改成功
 	} else {
-		echo mysql_error();
 		echo 0; // 修改失败
 	}
 } else {

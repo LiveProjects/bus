@@ -6,8 +6,9 @@ $firstname=$_GET['firstname'];
 /* $name=$_GET['name']; */
 
 if(isset($firstname)){
-	$link="SELECT FCompanyID FROM t_hs_employee WHERE FName =  '".$firstname."'";
+	$link="SELECT b.FName FROM t_hs_employee as a inner join t_hs_company as b on a.FCompanyID=b.FID WHERE a.FName =  '".$firstname."'";
 	$res=$DB->execsql($link);
+	
     echo json_encode($res);
 };
 

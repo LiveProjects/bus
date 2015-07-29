@@ -173,8 +173,8 @@ window.onload=function(){
                 success:function(data){
                     if(data!=''){
                         console.log(data);
-                        console.log(data[0]['FCompanyID']);
-                        var company=data[0]['FCompanyID'];
+                        console.log(data[0]['FName']);
+                        var company=data[0]['FName'];
                         gl.factory.setAttribute('disabled','disabled');
                         gl.factory.value=company;
                         //console.log(data);
@@ -250,11 +250,15 @@ window.onload=function(){
     	e.stopPropagation();
         e.cancelBubble=true;
         $.ajax({
-        	url:'asnycData/ForBookbusAsnyc.php',
-        	dataType:'json',
+        	url:'asnycData/book_commit.php',
+        	dataType:'',
         	Type:'POST',
         	data:{
-                "name":'123'/*,
+                "name_employee":"lio",
+                "FRDate":"2015-8-1 00:00:00",//加班日期
+                "FRTime":"7:30",//加班时间
+                "FStop":"清江路"//下车站点
+                /*,
                 'addtime':'',
                 'adddate':''*/
         	},
