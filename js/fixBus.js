@@ -197,11 +197,12 @@ window.onload=function(){
 
     gl.subfixbtn.onclick=function(){
         $.ajax({
-            url:'',
-            dataType:'json',
+            url:'fixBus.php',
+            dataType:'',
             Type:'POST',
             data:{
-                //四个值:姓名，加班日期、时间、下车地点
+                //四个值:姓名，加班日期、时间、下车地点+修改前的预约日期
+            	'FRDate':sessionStorage.getItem('fixdate'),
                 'fixname':sessionStorage.getItem('name'),
                 'fixdate':gl.downadddate.innerText,
                 'fixtime':gl.downaddtime.innerText,
@@ -211,7 +212,15 @@ window.onload=function(){
                 alert("---提交的数据为------"+gl.downadddate.innerText+gl.downaddtime.innerText+gl.downaddpark.innerText)
             },
             success:function(data){
-                alert(data);
+//                alert(data);
+                console.log(data);
+                if(data==1){
+                	alert("修改成功");
+                }else if(data==0){
+                	alert("修改失败，请联系技术支持");
+                }else{
+                	alert("请检查空项");
+                }
             },
             error:function(err){
                 alert("请检查网络是否连接");

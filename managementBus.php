@@ -56,7 +56,7 @@ if ($act == 'check') {
 	 */
 	/*
 	 * ajax({
-	 * url:busmanage.php?act='delete',
+	 * url:busmanage.php?act='DEL',
 	 * dataType:,
 	 * Type:,
 	 * data:{//"FNAME":fname,//职工姓名

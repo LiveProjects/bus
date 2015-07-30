@@ -47,7 +47,7 @@ class DB {
 	public function getrows() {
 		$rows = array ();
 		$row = array ();
-		if ($this->result != null) {
+		if ($this->result && mysql_num_rows($this->result)) {
 			while ( $row = mysql_fetch_array ( $this->result, MYSQL_ASSOC ) ) {
 				$rows [] = $row;
 			}
@@ -69,7 +69,8 @@ class DB {
 		$sql = "INSERT INTO {$table}({$keys}) VALUES ({$vals})";
 // 		echo $sql;
 		$stmt=mysql_query ( $sql,$this->conn );
-		if ($stmt){
+		$res=mysql_affected_rows($this->conn);
+		if ($res){
 			return true;
 			
 		}else {
