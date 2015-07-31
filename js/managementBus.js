@@ -70,7 +70,7 @@ window.onload=function(){
         var http_request = createLink();//创建一个ajax对象
         if(http_request){
             var url='json.php';
-            var arr=[{qwe:'asd',asd:'123'}];
+            var arr={'name':'lio','age':'123'};
             var data=arr;
             http_request.open("post",url,true);
             http_request.setRequestHeader("content-type","application/x-www-form-urlencoded");
@@ -90,6 +90,9 @@ window.onload=function(){
             console.log(http_request.readyState);
             if (http_request.readyState!=4) {
                 console.log('还未返回正确结果');
+                var load=setInterval(function(){
+                    console.log("正在加载.....");
+                },1000)
 
             }else if(http_request.readyState==4){
                 //等于200表示成功
