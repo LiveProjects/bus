@@ -69,7 +69,7 @@ window.onload=function(){
         //发送请求
         var http_request = createLink();//创建一个ajax对象
         if(http_request){
-            var url='json.php';
+            var url='managementBus.php';
             var arr=[{qwe:'asd',asd:'123'}];
             var data=arr;
             http_request.open("post",url,true);
