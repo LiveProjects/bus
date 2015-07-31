@@ -85,9 +85,9 @@ window.onload=function(){
                 case 'Tu':gl.makeday(2);break;
                 case 'We':gl.makeday(3);break;
                 case 'Tu':gl.makeday(4);break;
-                case 'Tu':gl.makeday(5);break;
-                case 'Tu':gl.makeday(6);break;
-                case 'Tu':gl.makeday(7);break;
+                case 'Fr':gl.makeday(5);break;
+                case 'Sa':gl.makeday(6);break;
+                case 'Su':gl.makeday(7);break;
                 default :break;
             }
 
