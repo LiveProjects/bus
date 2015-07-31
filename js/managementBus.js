@@ -104,10 +104,12 @@ window.onload=function(){
                 	console.log(JSON.parse(http_request.responseText));
                 	//deal(JSON.parse(http_request.responseText),function(){},function(){})
 
+                    var doc=document.createDocumentFragment();
+
                 	var li=
                         "<li>"+
 		                    "<div>"+
-		                        "<label for=''>下车地点  <input type='text' value='"+黄岛路+"'" +" disabled/></label>"+
+		                        "<label for=''>下车地点  <input type='text' value='"+'黄岛路'+"'" +" disabled/></label>"+
 		                    "</div>"+
 		                    "<span>"+
 		                        "<div>"+
@@ -123,8 +125,8 @@ window.onload=function(){
 		                        "<b class='de'><button>删除</button></b>"+
 		                        "<b><button type='reset'>修改</button></b>"+
 		                    "</p>"+
-		                "</li>";s
-                	
+		                "</li>";
+
                     /*var res = eval("("+http_request.responseText+")");*/
                 }
             }
