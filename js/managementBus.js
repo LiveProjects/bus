@@ -39,11 +39,15 @@ window.onload=function(){
     /*初始化数据ajax jquery备用*/
     /*(function(){
         $.ajax({
-            url:'',
-            Type:'POST',
+            url:'checkBus.php',
+            Type:'',
             dataType:'json',
+            data:{'name':'lio'},
             success:function(data){
                 console.log(data);
+            },
+            beforeSend:function(){
+            	alert(1234);
             },
             error:function(err){
                 alert(err);
@@ -51,7 +55,7 @@ window.onload=function(){
         })
     })();*/
 
-    function createLink(){//函数声明
+   function createLink(){//函数声明
         if(window.ActiveXObject){
             var newRequest = new ActiveXObject("Microsoft.XMLHTTP");
         }else{
@@ -59,17 +63,13 @@ window.onload=function(){
         }
         return newRequest;
     };
-    /*gl.submitbtn.onclick=function(e){
-        e.stopPropagation();
-        e.cancelBubble=true;
-    };*/
 
     /*主动初始化数据*/
     (function(){
         //发送请求
         var http_request = createLink();//创建一个ajax对象
         if(http_request){
-            var url='json.php';
+            var url='checkBus.php';
             var arr={'name':'lio','age':'123'};
 
             var data=arr;
@@ -79,9 +79,9 @@ window.onload=function(){
 
             //指定一个函数来处理从服务器返回的结果
             http_request.onreadystatechange = dealresult; //此函数不要括号,当状态发生变化时触发函数,相当于->
-            /*http_request.onreadystatechange=function(){
+            http_request.onreadystatechange=function(){
                 dealresult();
-            };*/
+            };
             //发送请求
             http_request.send(data);
         };
@@ -90,6 +90,7 @@ window.onload=function(){
         function dealresult(){
             console.log(http_request.readyState);
             if (http_request.readyState!=4) {
+            	alert(http_request.readyState);
                 console.log('还未返回正确结果');
                 var load=setInterval(function(){
                     console.log("正在加载.....");
@@ -97,12 +98,33 @@ window.onload=function(){
 
             }else if(http_request.readyState==4){
                 //等于200表示成功
-                clearInterval("load");
+            	clearInterval("load");
                 if(http_request.status==200){
-                    if(http_request.responseText=="no"){
-                        alert("删除成功");
-                        return;
-                    }
+                	
+                	console.log(JSON.parse(http_request.responseText));
+                	//deal(JSON.parse(http_request.responseText),function(){},function(){})
+
+                	var li=
+                        "<li>"+
+		                    "<div>"+
+		                        "<label for=''>下车地点  <input type='text' value='"+黄岛路+"'" +" disabled/></label>"+
+		                    "</div>"+
+		                    "<span>"+
+		                        "<div>"+
+		                            "<i>加班时间</i>"+
+		                            "<p>"+ 123 +"</p>"+
+		                        "</div>"+
+		                        "<div>"+
+		                            "<i>加班日期</i>"+
+		                            "<p>"+2014-6-6+"</p>"+
+		                        "</div>"+
+		                    "</span>"+
+		                    "<p>"+
+		                        "<b class='de'><button>删除</button></b>"+
+		                        "<b><button type='reset'>修改</button></b>"+
+		                    "</p>"+
+		                "</li>";s
+                	
                     /*var res = eval("("+http_request.responseText+")");*/
                 }
             }
@@ -110,6 +132,10 @@ window.onload=function(){
     })();
 
     /*删除数据*/
+    
+    function deal (data,successcallback,failcallback){
+    	
+    }
 
     $("#mainShow").find("b.de").find("button").click(function(){
         var that=$(this);
