@@ -5,7 +5,9 @@ window.onload=function(){
     var gl={
         manameinput:document.getElementById("maname").lastElementChild,
         manamespan:document.getElementById("maname").firstElementChild,
-        upname:document.getElementById("maname").lastElementChild.value
+        upname:document.getElementById("maname").lastElementChild.value,
+        mainShowul:document.getElementById("mainShow").lastElementChild,
+        factoryval:document.getElementById("factory").firstElementChild,
     };
     console.log(gl.manameinput.nodeName);
     console.log(gl.manamespan.nodeName);
@@ -90,7 +92,7 @@ window.onload=function(){
         function dealresult(){
             console.log(http_request.readyState);
             if (http_request.readyState!=4) {
-            	alert(http_request.readyState);
+            	console.log(http_request.readyState);
                 console.log('还未返回正确结果');
                 var load=setInterval(function(){
                     console.log("正在加载.....");
@@ -104,6 +106,41 @@ window.onload=function(){
                 	console.log(JSON.parse(http_request.responseText));
                 	//deal(JSON.parse(http_request.responseText),function(){},function(){})
 
+<<<<<<< HEAD
+                	var resdata=JSON.parse(http_request.responseText);
+                	var responselen=resdata['check'].length;
+                	var rescpm=resdata['company'];
+                	gl.factoryval.value=rescpm['name_com'];
+                	gl.manameinput.value=rescpm['name_emp'];
+                	
+                	
+                	(function(){
+                		for(var i=0;i<responselen;i++){
+                    		var li=
+                                "<li>"+
+        		                    "<div>"+
+        		                        "<label for=''>下车地点  <input type='text' value='"+resdata['check'][i]['FStop']+"'" +" disabled/></label>"+"<span>"+resdata['check'][i]['book_name']+"</span>"+
+        		                    "</div>"+
+        		                    "<span>"+
+        		                        "<div>"+
+        		                            "<i>加班时间</i>"+
+        		                            "<p>"+ resdata['check'][i]['FRTime'] +"</p>"+
+        		                        "</div>"+
+        		                        "<div>"+
+        		                            "<i>加班日期</i>"+
+        		                            "<p>"+resdata['check'][i]['FRDate']+"</p>"+
+        		                        "</div>"+
+        		                    "</span>"+
+        		                    "<p>"+
+        		                        "<b class='de'><button>删除</button></b>"+
+        		                        "<b><button type='reset'>修改</button></b>"+
+        		                    "</p>"+
+        		                "</li>";
+                    		$("#mainShow ul").append(li);
+                    	}
+                	})()
+                	//console.log(gl.mainShowul.innerHTML);
+=======
                     var doc=document.createDocumentFragment();
 
                 	var li=
@@ -126,6 +163,7 @@ window.onload=function(){
 		                        "<b><button type='reset'>修改</button></b>"+
 		                    "</p>"+
 		                "</li>";
+>>>>>>> ede4c4263cd7907e328be647c3bb01f3bdd1b59a
 
                     /*var res = eval("("+http_request.responseText+")");*/
                 }
@@ -134,36 +172,40 @@ window.onload=function(){
     })();
 
     /*删除数据*/
-    
-    function deal (data,successcallback,failcallback){
-    	
-    }
-
-    $("#mainShow").find("b.de").find("button").click(function(){
+    $("#mainShow ul").delegate("li b.de button",'click',function(){
         var that=$(this);
-        $.ajax({
-            url:'managementBus.php?act=DEL',
-            Type:'POST',
-            dataType:'json',
-            beforeSend:function(){
-                alert("要删除的日期是"+that.parent().parent().prev().find("div:last-child").find("p").text());
-            },
-            data:{
-            		//姓名+加班日期
-                'name':'lio',
-                'FID':that.parent().parent().prev().find("div:last-child").find("p").text()
-            },
-            success:function(data){
-
-                that.parent().parent().remove();
-            },
-            error:function(err){
-                alert("删除不成功");
-            }
-        })
+        confirm_=confirm("确定删除此订单");
+        if(confirm){
+        	 $.ajax({
+                 url:'delBus.php',
+                 Type:'POST',
+                 dataType:'text',
+                 beforeSend:function(){
+                     alert("要删除的日期是"+that.parent().parent().prev().find("div:last-child").find("p").text());
+                 },
+                 data:{
+                 		//姓名+加班日期
+                     'name':gl.manameinput.value,
+                     'FRDate':that.parent().parent().prev().find("div:last-child").find("p").text()
+                 },
+                 success:function(data){
+                 	/*that.parent().parent().parent().remove();*/
+                     if(data==1){
+                     	alert("删除成功");
+                     	that.parent().parent().parent().remove();
+                     }else {
+                     	alert("删除失败，请联系技术支持");
+                     }
+                 },
+                 error:function(err){
+                     alert("删除不成功");
+                 }
+             })
+        }
     });
+    
     /*修改数据*/
-    $("#mainShow").find("b.de").next().find('button').click(function(){
+    $("#mainShow ul").delegate("li b:last-child button",'click',function(){
         /*确定用户数据*/
         //姓名+加班日期
         sessionStorage.setItem('name','lio');
@@ -176,8 +218,6 @@ window.onload=function(){
         sessionStorage.setItem('fixadd',$(this).parent().parent().parent().children("div").find("input").val());
 
         alert("初始化的数据为:"+sessionStorage.getItem('fixdate')+sessionStorage.getItem('fixtime')+sessionStorage.getItem('fixadd'));
-
-
 
         location.href="fixBus.html";
 
