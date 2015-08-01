@@ -216,6 +216,7 @@ window.onload=function(){
                 console.log(data);
                 if(data==1){
                 	alert("修改成功");
+                	window.location.href='managementBus.html';
                 }else if(data==0){
                 	alert("修改失败，请联系技术支持");
                 }else{

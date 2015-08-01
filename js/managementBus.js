@@ -106,7 +106,7 @@ window.onload=function(){
                 	console.log(JSON.parse(http_request.responseText));
                 	//deal(JSON.parse(http_request.responseText),function(){},function(){})
 
-<<<<<<< HEAD
+
                 	var resdata=JSON.parse(http_request.responseText);
                 	var responselen=resdata['check'].length;
                 	var rescpm=resdata['company'];
@@ -140,30 +140,7 @@ window.onload=function(){
                     	}
                 	})()
                 	//console.log(gl.mainShowul.innerHTML);
-=======
-                    var doc=document.createDocumentFragment();
 
-                	var li=
-                        "<li>"+
-		                    "<div>"+
-		                        "<label for=''>下车地点  <input type='text' value='"+'黄岛路'+"'" +" disabled/></label>"+
-		                    "</div>"+
-		                    "<span>"+
-		                        "<div>"+
-		                            "<i>加班时间</i>"+
-		                            "<p>"+ 123 +"</p>"+
-		                        "</div>"+
-		                        "<div>"+
-		                            "<i>加班日期</i>"+
-		                            "<p>"+2014-6-6+"</p>"+
-		                        "</div>"+
-		                    "</span>"+
-		                    "<p>"+
-		                        "<b class='de'><button>删除</button></b>"+
-		                        "<b><button type='reset'>修改</button></b>"+
-		                    "</p>"+
-		                "</li>";
->>>>>>> ede4c4263cd7907e328be647c3bb01f3bdd1b59a
 
                     /*var res = eval("("+http_request.responseText+")");*/
                 }
