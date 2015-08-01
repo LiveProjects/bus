@@ -24,7 +24,7 @@ window.onload=function(){
             for(;num<=7;num++){
                 var colorSE=Math.floor(Math.random()*4);
                 var li=document.createElement("li");
-                var txt=document.createTextNode(num);
+                var txt=document.createTextNode('2015-8-1');
                 li.appendChild(txt);
                 li.style.backgroundColor=gl.randomcolor()[colorSE];
                 datefra.appendChild(li);

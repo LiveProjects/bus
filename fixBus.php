@@ -4,19 +4,7 @@ require 'dbaccess.php';
  * *****************预约修改******************
  */
 
-/*
- * ajax({
- * url:fixBus.php,
- * dataType:,
- * Type:,
- * data:{"FSTOP":fstop,//下车站点
- * "BTIME":btime,//预约班车时间
- * "BDATE":bdate,//修改后的预约班车日期
- * "FRDate":frdate,//修改前的预约班车日期
- * "FID":fid},
- * });
- *
- */
+$openid = '0001';
 $BTime = $_GET ['fixtime']; // 修改后的预约时间
 $BDate = $_GET ['fixdate']; // 修改后的预约日期
 $FStop = $_GET ['fixpark']; // 修改后的下车站点
@@ -47,15 +35,16 @@ if (empty ( $BTime ) || empty ( $BDate ) || empty ( $FStop )) {
 	}
 	$sql_id_emp = "select FID from t_hs_employee where FName='{$FName}'";
 	$res_id_emp = $db->getrow ( $sql_id_emp );
-	// echo $sql_id_emp;
+	// echo $res_id_emp['FID'];
+	$sql_id_book = "select FID from t_hs_employee where FWechatID='{$openid}'";
+	$res_id_book = $db->getrow ( $sql_id_book );
 	$sql_stop = "select FID from t_hs_stop where FName='{$FStop}' ";
 	$res_stop = $db->getrow ( $sql_stop );
 	// echo $sql_stop;
-	// $sql_mod = "update t_hs_overwork_reserv set FStopID='{$res_stop['FID']}' , FRTime='{$BTime}' , FRDate='{$BDate}' , FDate='{$time}' , FType='{$FType}' where FID='{$FID}'";
-	$sql_mod = "update  t_hs_overwork_reserv set FStopID='{$res_stop['FID']}' , FRTime='{$BTime}' , FRDate='{$BDate}' , FDate='{$time}' , FType='{$FType}' where FEmployeeID='{$sql_id_emp['FID']}' and FRDate='{$FRDate}'";
-	// echo $sql_mod;
+	$sql_mod = "update  t_hs_overwork_reserv set FBookID='{$res_id_book['FID']}',FStopID='{$res_stop['FID']}' , FRTime='{$BTime}' , FRDate='{$BDate}' , FDate='{$time}' , FType='{$FType}' where FEmployeeID='{$res_id_emp['FID']}' and FRDate='{$FRDate}'";
+	// echo $sql_mod;DIE;
 	$res_mod = $db->execsql ( $sql_mod );
-	$num_row = mysql_affected_rows ( $res_mod );
+	$num_row = mysql_affected_rows ();
 	if ($num_row) {
 		echo 1; // 修改成功
 	} else {

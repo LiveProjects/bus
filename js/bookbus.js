@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2015/7/24 0024.
  */
+
 window.onload=function(){
     console.log("Welcome to Hisense");
     var parkList=document.getElementById("parkList");
@@ -30,11 +31,15 @@ window.onload=function(){
         },
         makeday:function(num){
             var datefra=document.createDocumentFragment();
+            var year=gl.whichDay.getFullYear();
+            var month=gl.whichDay.getMonth()+1;
+            var day=Number(gl.whichDay.getDate());
+            //alert(year+"-"+month+"-"+day);
 
             for(;num<=7;num++){
                 var colorSE=Math.floor(Math.random()*4);
                 var li=document.createElement("li");
-                var txt=document.createTextNode(num);
+                var txt=document.createTextNode(year+"-"+month+"-"+(day++));
                 li.appendChild(txt);
                 li.style.backgroundColor=gl.randomcolor()[colorSE];
                 datefra.appendChild(li);
@@ -46,7 +51,6 @@ window.onload=function(){
 
 
 
-    
 
     /********加载初始化的数据*******************************/
 
@@ -259,7 +263,7 @@ window.onload=function(){
     /*提交预订数据*/
     gl.submitbtn.onclick=function(e){
     	
-alert(gl.upadddateval.innerHTML);
+        console.log(gl.upadddateval.innerHTML);
     	e.stopPropagation();
         e.cancelBubble=true;
         
@@ -279,7 +283,7 @@ alert(gl.upadddateval.innerHTML);
         	},
         	beforeSend:function(){
     			//这里确定一遍数据
-                alert("确定一遍数据");
+                console.log("确定一遍数据");
     		},
         	success:function(data){
                 console.log(data);
