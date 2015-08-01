@@ -27,7 +27,7 @@ if (empty ( $BTime ) || empty ( $BDate ) || empty ( $FStop )) {
 			$FType = 1;
 			break;
 		case 6 :
-		case 7 :
+		case 0 :
 			$FType = 2;
 			break;
 		default :

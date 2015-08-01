@@ -3,6 +3,7 @@ require '../dbaccess.php';
 $name_emp = $_GET ['name_employee'];
 $FRTime = $_GET ['FRTime']; // 加班时间
 $FRDate = $_GET ['FRDate']; // 加班日期
+// $FRDate = "2015-7-31"; // 加班日期
 $FStop = $_GET ['FStop']; // 下车站点
 $openid = "0001"; // 获取预约人的微信ID
 /*
@@ -16,7 +17,7 @@ if (empty ( $name_emp ) || empty ( $FRTime ) || empty ( $FRDate ) || empty ( $FS
 	die ();
 } else {
 	$week = date ( 'w', strtotime ( $FRDate ) );
-	// echo $week;
+// 	echo "haha".$week."hah";
 	switch ($week) {
 		case 1 :
 		case 2 :
@@ -26,7 +27,7 @@ if (empty ( $name_emp ) || empty ( $FRTime ) || empty ( $FRDate ) || empty ( $FS
 			$FType = 1;
 			break;
 		case 6 :
-		case 7 :
+		case 0 :
 			$FType = 2;
 			break;
 		default :
@@ -53,6 +54,7 @@ if (empty ( $name_emp ) || empty ( $FRTime ) || empty ( $FRDate ) || empty ( $FS
 	$book ['FType'] = $FType;
 	$book ['FDate'] = date ( 'Y-m-d H:i:s', time () );
 	$book ['FBookID'] = $res_id_book ['FID'];
+// 	print_r($book);die;
 	// 判断是否重复预约
 	$sql_repeat = "select FID from t_hs_overwork_reserv where FEmployeeID='{$book['FEmployeeID']}' and FRDate='{$book ['FRDate']}' ";
 	$res_repeat = $db->getrow ( $sql_repeat );

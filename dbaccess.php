@@ -69,7 +69,7 @@ class DB {
 		$sql = "INSERT INTO {$table}({$keys}) VALUES ({$vals})";
 // 		echo $sql;
 		$stmt=mysql_query ( $sql,$this->conn );
-		$res=mysql_affected_rows($this->conn);
+		$res=mysql_affected_rows();
 		if ($res){
 			return true;
 			
