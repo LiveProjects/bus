@@ -55,7 +55,7 @@ window.onload=function(){
     /********加载初始化的数据*******************************/
 
     $.ajax({
-        url:'json.php',
+        url:'non_get/json.php',
         dataType:'json',
         Type:'POST',
         success:function(data){

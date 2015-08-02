@@ -71,7 +71,7 @@ window.onload=function(){
         //发送请求
         var http_request = createLink();//创建一个ajax对象
         if(http_request){
-            var url='checkBus.php';
+            var url='non_get/checkBus.php';
             var arr={'name':'lio','age':'123'};
 
             var data=arr;
@@ -154,7 +154,7 @@ window.onload=function(){
         confirm_=confirm("确定删除此订单");
         if(confirm){
         	 $.ajax({
-                 url:'delBus.php',
+                 url:'asnycData/delBus.php',
                  Type:'POST',
                  dataType:'text',
                  beforeSend:function(){

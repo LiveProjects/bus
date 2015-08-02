@@ -1,5 +1,5 @@
 <?php
-require 'dbaccess.php';
+require '../non_get/dbaccess.php';
 /**
  * *****************预约修改******************
  */

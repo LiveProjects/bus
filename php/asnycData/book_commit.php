@@ -1,5 +1,5 @@
 <?php
-require '../dbaccess.php';
+require '../non_get/dbaccess.php';
 $name_emp = $_GET ['name_employee'];
 $FRTime = $_GET ['FRTime']; // 加班时间
 $FRDate = $_GET ['FRDate']; // 加班日期

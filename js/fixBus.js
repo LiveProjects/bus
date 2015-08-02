@@ -197,7 +197,7 @@ window.onload=function(){
 
     gl.subfixbtn.onclick=function(){
         $.ajax({
-            url:'fixBus.php',
+            url:'asnycData/fixBus.php',
             dataType:'',
             Type:'POST',
             data:{
