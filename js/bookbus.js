@@ -55,7 +55,7 @@ window.onload=function(){
     /********加载初始化的数据*******************************/
 
     $.ajax({
-        url:'non_get/json.php',
+        url:'php/non_get/json.php',
         dataType:'json',
         Type:'POST',
         success:function(data){
@@ -177,7 +177,7 @@ window.onload=function(){
             var data=gl.manameinput.value;
 
             $.ajax({
-                url:'asnycData/ForBookbusAsnyc.php',
+                url:'php/asnycData/ForBookbusAsnyc.php',
                 dataType:'json',
                 Type:'POST',
                 data:{
@@ -268,7 +268,7 @@ window.onload=function(){
         e.cancelBubble=true;
         
         $.ajax({
-        	url:'asnycData/book_commit.php',
+        	url:'php/asnycData/book_commit.php',
         	dataType:'',
         	Type:'POST',
         	data:{

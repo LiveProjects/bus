@@ -71,7 +71,7 @@ window.onload=function(){
         //发送请求
         var http_request = createLink();//创建一个ajax对象
         if(http_request){
-            var url='non_get/checkBus.php';
+            var url='php/non_get/checkBus.php';
             var arr={'name':'lio','age':'123'};
 
             var data=arr;
@@ -151,10 +151,10 @@ window.onload=function(){
     /*删除数据*/
     $("#mainShow ul").delegate("li b.de button",'click',function(){
         var that=$(this);
-        confirm_=confirm("确定删除此订单");
+        confirm_=confirm("确定删除此预约记录？");
         if(confirm){
         	 $.ajax({
-                 url:'asnycData/delBus.php',
+                 url:'php/asnycData/delBus.php',
                  Type:'POST',
                  dataType:'text',
                  beforeSend:function(){
@@ -170,7 +170,9 @@ window.onload=function(){
                      if(data==1){
                      	alert("删除成功");
                      	that.parent().parent().parent().remove();
-                     }else {
+                     }else if(data==2){
+                    	 alert("请在每天下午5点之间删除记录");
+                     }else{
                      	alert("删除失败，请联系技术支持");
                      }
                  },

@@ -48,7 +48,7 @@ window.onload=function(){
 
     /********加载初始化的数据*******************************/
     $.ajax({
-        url:'json.php',
+        url:'php/non_get/json.php',
         dataType:'json',
         Type:'POST',
         success:function(data){
@@ -197,7 +197,7 @@ window.onload=function(){
 
     gl.subfixbtn.onclick=function(){
         $.ajax({
-            url:'asnycData/fixBus.php',
+            url:'php/asnycData/fixBus.php',
             dataType:'',
             Type:'POST',
             data:{
@@ -219,6 +219,8 @@ window.onload=function(){
                 	window.location.href='managementBus.html';
                 }else if(data==0){
                 	alert("修改失败，请联系技术支持");
+                }else if(data==3){
+                	alert("请在每天下午5点之前修改记录");
                 }else{
                 	alert("请检查空项");
                 }
