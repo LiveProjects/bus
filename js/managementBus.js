@@ -7,7 +7,7 @@ window.onload=function(){
         manamespan:document.getElementById("maname").firstElementChild,
         upname:document.getElementById("maname").lastElementChild.value,
         mainShowul:document.getElementById("mainShow").lastElementChild,
-        factoryval:document.getElementById("factory").firstElementChild,
+        factoryval:document.getElementById("factory").firstElementChild
     };
     console.log(gl.manameinput.nodeName);
     console.log(gl.manamespan.nodeName);
@@ -102,7 +102,8 @@ window.onload=function(){
                 //等于200表示成功
             	clearInterval("load");
                 if(http_request.status==200){
-                	
+                    /*console.log(http_request.responseType);
+                    console.log(http_request.responseText);*/
                 	console.log(JSON.parse(http_request.responseText));
                 	//deal(JSON.parse(http_request.responseText),function(){},function(){})
 
@@ -112,8 +113,8 @@ window.onload=function(){
                 	var rescpm=resdata['company'];
                 	gl.factoryval.value=rescpm['name_com'];
                 	gl.manameinput.value=rescpm['name_emp'];
-                	
-                	
+
+
                 	(function(){
                 		for(var i=0;i<responselen;i++){
                     		var li=
@@ -138,7 +139,7 @@ window.onload=function(){
         		                "</li>";
                     		$("#mainShow ul").append(li);
                     	}
-                	})()
+                	})();
                 	//console.log(gl.mainShowul.innerHTML);
 
 
@@ -182,7 +183,7 @@ window.onload=function(){
              })
         }
     });
-    
+
     /*修改数据*/
     $("#mainShow ul").delegate("li b:last-child button",'click',function(){
         /*确定用户数据*/

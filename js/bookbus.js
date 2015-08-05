@@ -36,6 +36,8 @@ window.onload=function(){
             var day=Number(gl.whichDay.getDate());
             //alert(year+"-"+month+"-"+day);
 
+            var datecur=year+"-"+month+"-"+(day);
+            gl.upadddateval.innerHTML=datecur;
             for(;num<=7;num++){
                 var colorSE=Math.floor(Math.random()*4);
                 var li=document.createElement("li");
@@ -78,7 +80,9 @@ window.onload=function(){
                 li.style.backgroundColor=gl.randomcolor()[colorSE];
                 gl.addtimefragment.appendChild(li);
         	});
+
             gl.addtimeUl.appendChild(gl.addtimefragment);
+            gl.upaddtimeval.innerText
 
 
             /* 添加加班日期*/
@@ -88,7 +92,7 @@ window.onload=function(){
                 case 'Mo':gl.makeday(1);break;
                 case 'Tu':gl.makeday(2);break;
                 case 'We':gl.makeday(3);break;
-                case 'Tu':gl.makeday(4);break;
+                case 'Th':gl.makeday(4);break;
                 case 'Fr':gl.makeday(5);break;
                 case 'Sa':gl.makeday(6);break;
                 case 'Su':gl.makeday(7);break;
@@ -140,6 +144,17 @@ window.onload=function(){
         }
     });
 
+    if(localStorage.getItem('usuallytime')){
+        gl.upaddtimeval.innerText=localStorage.getItem('usuallytime');
+    }else{
+        gl.upaddtimeval.innerText=gl.addtimeUl.firstElementChild.innerText;
+    }
+
+    if(localStorage.getItem('usually0')){
+        gl.upparkval.innerText=localStorage.getItem('usually0');
+    }else{
+        gl.upparkval.innerText=gl.parkOl.firstElementChild.innerText;
+    }
     /*设置离线下车地点,更人性化是放到预订成功之后*/
     $("#parkListul").delegate('li','click',function(){
         var parkval=$(this).text();
@@ -209,6 +224,7 @@ window.onload=function(){
     },false);
 
 
+
     /* 尝试function(xxx,successcallback,errorcallback){}*/
 
 
@@ -228,10 +244,22 @@ window.onload=function(){
 
     /*时间委托部分以后用原生js代替*/
     $("#adddate ul").delegate('li','click',function(){
-        var valdate=$(this).text();
-        //alert(valdate);
-       $(this).parent().prev().find("b").text(valdate);
+
+        if($(this).index()!=$("#adddate ul li").length-1){
+            var valdate=$(this).text();
+            //alert(valdate);
+            $(this).parent().prev().find("b").text(valdate);
+            $("#addtimeval").text("7:30");
+            $("#addtime").find("ul").css('visibility','visible');
+        }else if($(this).index()==$("#adddate ul li").length-1){
+            var valdate=$(this).text();
+            $("#addtimeval").text("采用默认值");
+            $("#addtime").find("ul").css('visibility','hidden');
+        }
     });
+    /*$("#adddate ul").delegate('li:last-child','click',function(){
+
+    });*/
     $("#addtime ul").delegate('li','click',function(){
         var valtime=$(this).text();
         //alert(valdate);
@@ -289,6 +317,7 @@ window.onload=function(){
                 console.log(data);
                 if(data==1){
                 	alert("预约成功");
+                    localStorage.setItem('usuallytime',gl.upaddtimeval.innerText);
                 }else if(data==2){
                 	alert("请检查空项");
                 }else{

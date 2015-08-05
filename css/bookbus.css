@@ -127,6 +127,7 @@ body {
   font-size: 1.3rem;
   color: white;
   text-align: left;
+  min-width: 160px ;
 }
 #outLine #adddate ul {
   width: 100%;
@@ -170,6 +171,7 @@ body {
   text-align: left;
   width: 100px;
   color: white;
+  min-width: 160px ;
 }
 #outLine #addtime ul {
   width: 100%;
@@ -207,7 +209,7 @@ body {
 }
 #outLine #park span b {
   position: absolute;
-  width: 100px;
+  min-width: 160px ;
   left: 120%;
   top: 0;
   font-size: 1.3rem;
@@ -253,14 +255,14 @@ body {
 }
 #parkList {
   position: absolute;
-  width: 100px;
+  width: 140px;
   top: 0;
-  -webkit-transition: ease-out 0.3s;
-  -moz-transition: ease-out 0.3s;
-  -ms-transition: ease-out 0.3s;
-  -o-transition: ease-out 0.3s;
-  transition: ease-out 0.3s;
-  right: -100px;
+  -webkit-transition: ease-out 0.26s;
+  -moz-transition: ease-out 0.26s;
+  -ms-transition: ease-out 0.26s;
+  -o-transition: ease-out 0.26s;
+  transition: ease-out 0.26s;
+  right: -140px;
 }
 #parkList ul {
   width: 100%;
