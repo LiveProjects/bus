@@ -31,20 +31,37 @@ window.onload=function(){
         },
         makeday:function(num){
             var datefra=document.createDocumentFragment();
-            var year=gl.whichDay.getFullYear();
+            /*var year=gl.whichDay.getFullYear();
             var month=gl.whichDay.getMonth()+1;
             var day=Number(gl.whichDay.getDate());
-            //alert(year+"-"+month+"-"+day);
+            //alert(year+"-"+month+"-"+day);*/
 
-            var datecur=year+"-"+month+"-"+(day);
-            gl.upadddateval.innerHTML=datecur;
+
+
+            //var datecur=year+"-"+month+"-"+(day);
+            //gl.upadddateval.innerHTML=datecur;
+            var j=0;
             for(;num<=6;num++){
-                var colorSE=Math.floor(Math.random()*4);
-                var li=document.createElement("li");
-                var txt=document.createTextNode(year+"-"+month+"-"+(day++));
-                li.appendChild(txt);
-                li.style.backgroundColor=gl.randomcolor()[colorSE];
-                datefra.appendChild(li);
+                /*Date curDate = new Date();
+                 var preDate = new Date(curDate.getTime() - 24*60*60*1000);  //前一天
+                 var nextDate = new Date(curDate.getTime() + 24*60*60*1000);  //后一天*/
+
+                (function(j){
+                    var sec=86400*1000;
+                    //alert(num);
+                    var colorSE=Math.floor(Math.random()*4);
+                    var li=document.createElement("li");
+                    var time=new Date(gl.whichDay.getTime()+(j*sec));
+
+                    console.log(new Date(parseInt(gl.whichDay.getTime())+(j*sec)));
+
+                    var txt=document.createTextNode(time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate());
+                    /*var txt=document.createTextNode(year+"-"+month+"-"+(day++));*/
+                    li.appendChild(txt);
+                    li.style.backgroundColor=gl.randomcolor()[colorSE];
+                    datefra.appendChild(li);
+                })(j);
+                j++;
             }
             gl.adddate.appendChild(datefra);
         },
@@ -143,6 +160,21 @@ window.onload=function(){
             }())
         }
     });
+
+    /*取周六的下车地点*/
+    function sat(){
+        $.ajax({
+            url:'',
+            Type:'POST',
+            dataType:'json',
+            success:function(data){
+                alert(data)
+            },
+            error:function(data){
+                console.log(data);
+            }
+        })
+    }
 
     if(localStorage.getItem('usuallytime')){
         gl.upaddtimeval.innerText=localStorage.getItem('usuallytime');
@@ -255,6 +287,17 @@ window.onload=function(){
             var valdate=$(this).text();
             $("#addtimeval").text("采用默认值");
             $("#addtime").find("ul").css('visibility','hidden');
+
+            $("#park ol").empty();
+            $("#park span b").empty();
+
+            (function(){
+                for(var i=0;i<5;i++){
+                    var li="<li>"+"上车"+"</li>";
+                    $("#park ol").append(li);
+                }
+            })()
+
         }
     });
     /*$("#adddate ul").delegate('li:last-child','click',function(){

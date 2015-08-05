@@ -1,5 +1,6 @@
 <?php
 require '../non_get/dbaccess.php';
+error_reporting(0);
 /**
  * *****************预约修改******************
  */
@@ -12,6 +13,8 @@ $FRDate = $_GET ['FRDate']; // 修改前的预约日期
 $FName = $_GET ['fixname']; // 职员姓名
                             // $FID=$_GET['FID'];
                             // 获取小时数
+
+                            
 $data_hour = date ( 'H', time () );
 // echo $data_hour;
 if ($data_hour >= 17) {

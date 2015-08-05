@@ -165,7 +165,7 @@ window.onload=function(){
                  Type:'POST',
                  dataType:'text',
                  beforeSend:function(){
-                     alert("要删除的日期是"+that.parent().parent().prev().find("div:last-child").find("p").text());
+                     //alert("要删除的日期是"+that.parent().parent().prev().find("div:last-child").find("p").text());
                  },
                  data:{
                  		//姓名+加班日期
@@ -198,14 +198,14 @@ window.onload=function(){
         sessionStorage.setItem('name',$("#maname").find("input").val());
 
         sessionStorage.setItem('date',$(this).parent().parent().prev().find("div:last-child").find("p").text());
-        alert("临时数据为"+sessionStorage.getItem('name')+sessionStorage.getItem('date'));
+        //alert("临时数据为"+sessionStorage.getItem('name')+sessionStorage.getItem('date'));
 
         /*初始填充值*/
         sessionStorage.setItem('fixdate',$(this).parent().parent().prev().find("div:last-child").find("p").text());
         sessionStorage.setItem('fixtime',$(this).parent().parent().prev().find("div:first-child").find("p").text());
         sessionStorage.setItem('fixadd',$(this).parent().parent().parent().children("div").find("input").val());
 
-        alert("初始化的数据为:"+sessionStorage.getItem('fixdate')+sessionStorage.getItem('fixtime')+sessionStorage.getItem('fixadd'));
+        //alert("初始化的数据为:"+sessionStorage.getItem('fixdate')+sessionStorage.getItem('fixtime')+sessionStorage.getItem('fixadd'));
 
         location.href="fixBus.html";
 

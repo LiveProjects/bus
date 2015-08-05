@@ -20,23 +20,39 @@ window.onload=function(){
         whichDay:new Date(),
         makeday:function(num){
             var datefra=document.createDocumentFragment();
-            var year=gl.whichDay.getFullYear();
-            var month=gl.whichDay.getMonth()+1;
-            var day=Number(gl.whichDay.getDate());
-            //alert(year+"-"+month+"-"+day);
+            /*var year=gl.whichDay.getFullYear();
+             var month=gl.whichDay.getMonth()+1;
+             var day=Number(gl.whichDay.getDate());
+             //alert(year+"-"+month+"-"+day);*/
 
-            var datecur=year+"-"+month+"-"+(day);
+
+
+            //var datecur=year+"-"+month+"-"+(day);
             //gl.upadddateval.innerHTML=datecur;
-            for(;num<=7;num++){
-                var colorSE=Math.floor(Math.random()*4);
-                var li=document.createElement("li");
-                var txt=document.createTextNode(year+"-"+month+"-"+(day++));
-                li.appendChild(txt);
-                li.style.backgroundColor=gl.randomcolor()[colorSE];
-                datefra.appendChild(li);
+            var j=0;
+            for(;num<=6;num++){
+                /*Date curDate = new Date();
+                 var preDate = new Date(curDate.getTime() - 24*60*60*1000);  //前一天
+                 var nextDate = new Date(curDate.getTime() + 24*60*60*1000);  //后一天*/
+
+                (function(j){
+                    var sec=86400*1000;
+                    //alert(num);
+                    var colorSE=Math.floor(Math.random()*4);
+                    var li=document.createElement("li");
+                    var time=new Date(gl.whichDay.getTime()+(j*sec));
+
+                    console.log(new Date(parseInt(gl.whichDay.getTime())+(j*sec)));
+
+                    var txt=document.createTextNode(time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate());
+                    /*var txt=document.createTextNode(year+"-"+month+"-"+(day++));*/
+                    li.appendChild(txt);
+                    li.style.backgroundColor=gl.randomcolor()[colorSE];
+                    datefra.appendChild(li);
+                })(j);
+                j++;
             }
             gl.adddate.appendChild(datefra);
-
         },
         addtimefragment:document.createDocumentFragment()
     };
@@ -167,9 +183,29 @@ window.onload=function(){
 
     /*时间委托部分以后用原生js代替*/
     $("#fixdate ul").delegate('li','click',function(){
-        var valdate=$(this).text();
-        //alert(valdate);
-        $(this).parent().prev().find("b").text(valdate);
+
+        if($(this).index()!=$("#fixdate ul li").length-1){
+            var valdate=$(this).text();
+            //alert(valdate);
+            $(this).parent().prev().find("b").text(valdate);
+            //$("#addtimeval").text("7:30");
+            $("#fixtime").find("ul").css('visibility','visible');
+        }else if($(this).index()==$("#fixdate ul li").length-1){
+            var valdate=$(this).text();
+            $("#fixtimeval").text("采用默认值");
+            $("#fixtime").find("ul").css('visibility','hidden');
+
+            $("#fixname ol").empty();
+            $("#fixname span b").empty();
+
+            (function(){
+                for(var i=0;i<5;i++){
+                    var li="<li>"+"上车"+"</li>";
+                    $("#fixname ol").append(li);
+                }
+            })()
+
+        }
     });
     $("#fixtime ul").delegate('li','click',function(){
         var valtime=$(this).text();
