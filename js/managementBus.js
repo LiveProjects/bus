@@ -57,7 +57,9 @@ window.onload=function(){
         })
     })();*/
 
-    function createLink(){//函数声明
+
+   function createLink(){//函数声明
+
         if(window.ActiveXObject){
             var newRequest = new ActiveXObject("Microsoft.XMLHTTP");
         }else{
@@ -72,18 +74,22 @@ window.onload=function(){
         var http_request = createLink();//创建一个ajax对象
         if(http_request){
             var url='php/non_get/checkBus.php';
+
             //var arr={'name':'lio','age':'123'};
 
             //var data=arr;
+
             http_request.open("post",url,true);
             http_request.setRequestHeader("content-type","application/x-www-form-urlencoded");
 
 
             //指定一个函数来处理从服务器返回的结果
             http_request.onreadystatechange = dealresult; //此函数不要括号,当状态发生变化时触发函数,相当于->
+
             /*http_request.onreadystatechange=function(){
                 dealresult();
             };*/
+
             //发送请求
             http_request.send();
         };
@@ -188,7 +194,9 @@ window.onload=function(){
     $("#mainShow ul").delegate("li b:last-child button",'click',function(){
         /*确定用户数据*/
         //姓名+加班日期
+
         sessionStorage.setItem('name',$("#maname").find("input").val());
+
         sessionStorage.setItem('date',$(this).parent().parent().prev().find("div:last-child").find("p").text());
         alert("临时数据为"+sessionStorage.getItem('name')+sessionStorage.getItem('date'));
 
