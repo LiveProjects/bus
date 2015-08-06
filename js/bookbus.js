@@ -38,7 +38,7 @@ window.onload=function(){
 
             var datecur=year+"-"+month+"-"+(day);
             gl.upadddateval.innerHTML=datecur;
-            for(;num<=7;num++){
+            for(;num<=6;num++){
                 var colorSE=Math.floor(Math.random()*4);
                 var li=document.createElement("li");
                 var txt=document.createTextNode(year+"-"+month+"-"+(day++));

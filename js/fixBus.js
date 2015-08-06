@@ -20,11 +20,17 @@ window.onload=function(){
         whichDay:new Date(),
         makeday:function(num){
             var datefra=document.createDocumentFragment();
+            var year=gl.whichDay.getFullYear();
+            var month=gl.whichDay.getMonth()+1;
+            var day=Number(gl.whichDay.getDate());
+            //alert(year+"-"+month+"-"+day);
 
+            var datecur=year+"-"+month+"-"+(day);
+            //gl.upadddateval.innerHTML=datecur;
             for(;num<=7;num++){
                 var colorSE=Math.floor(Math.random()*4);
                 var li=document.createElement("li");
-                var txt=document.createTextNode('2015-8-1');
+                var txt=document.createTextNode(year+"-"+month+"-"+(day++));
                 li.appendChild(txt);
                 li.style.backgroundColor=gl.randomcolor()[colorSE];
                 datefra.appendChild(li);
