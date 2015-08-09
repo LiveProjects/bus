@@ -1,28 +1,26 @@
 <?php
-require '../non_get/dbaccess.php';
-$DB = new DB ();
-/**
- * *******************用户名以及工厂模糊查询*************************************
+/*
+ * 根据职员编号查询职员的姓名及所在的公司和部门,并将部门和公司存入session中
  */
-$firstname = $_GET ['firstname']; // 获取失去焦点后的姓名全拼
-$res = array ();
-/* $name = $_GET ['name']; // 获取用户输入的部分姓名
-$res_name = array (); */
-
-if (isset ( $firstname )) {
-	$sql_name_com = "SELECT b.FName FROM t_hs_employee as a inner join t_hs_company as b on a.FCompanyID=b.FID WHERE a.FName =  '" . $firstname . "'";
-	$res_name_com = $DB->execsql ( $sql_name_com );
-	echo json_encode($res_name_com);
+header ( 'content-type:text/html;charset=utf-8' );
+require '../non_get/dbaccess.php';
+$db = new DB ();
+session_start ();
+// $emp_num='0001';
+// $res = array ();
+if (isset ( $_SESSION ['emp_number'] )) {
+	$emp_num = $_SESSION ['emp_number'];
+	$sql_name_com = "SELECT b.FName as Company,a.FName as name,a.FSectionID as Section FROM t_hs_employee as a inner join t_hs_company as b on a.FCompanyID=b.FID WHERE a.FNumber = '{$emp_num}' ";
+	$res_name_com = $db->getrow ( $sql_name_com );
+	// echo $sql_name_com;
+	$sql_name_sec = "select FName from t_hs_section where FID='{$res_name_com['Section']}'";
+	$res_name_sec = $db->getrow ( $sql_name_sec );
+	$res_name_com ['Section'] = $res_name_sec ['FName'];
+	// var_dump($res_name_com);
+	$res_name_com['number']=$emp_num;
+	$_SESSION['Company']=$res_name_com['Company'];
+	$_SESSION['Section']=$res_name_com['Section'];
+	echo json_encode ( $res_name_com );
 }
 
-
-/* // 模糊查询人名
-if (isset ( $name )) {
-	$sql_name_emp = "select FName from t_hs_employee where FName like '%" . $name . "%' limit 10";
-	$res_name_emp = $db->execsql ( $sql_name_emp );
-}
-
-// 将两个数组存放到一个数组中
-$name_com_emp=array("com"=>$res_name_com,"emp"=>$res_name_emp);
-echo json_encode($name_com_emp); */
 ?>

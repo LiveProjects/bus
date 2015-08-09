@@ -1,61 +1,33 @@
 <?php
-	require 'dbaccess.php';
-	//error_reporting(0);
-	$DB=new DB();
-	
-	/*********************加班时间查询**************************************/
-	$linktime="SELECT * FROM t_hs_bustime";
-	$restime=$DB->execsql($linktime);
-	
-	
-	/*********************班车站点查询**************************************/
-	$linkBS="SELECT FName FROM t_hs_stop";
-	$resBS=$DB->execsql($linkBS);
-	
-	
-	
-	
-	$chushi=array('addtime'=>$restime,'addBS'=>$resBS);
-	echo json_encode($chushi);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//这种设置数组名的方式有点麻烦
-	/* $arr=array('addtime'=>$res);
-	echo $arr."<br/>";
-	echo json_encode($arr)."<br/>";
-	foreach ($arr as $key =>  $val){
-		echo $key;
-		print_r($val)."<br/>";
-	} */
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/***********************测试数据模块 ************************************************/
-	/* $arr=array(
-			'name'=>'asd',
-			'age'=>123,
-			'sex'=>'男'
-	); */
-	//$as=$_GET['name'];
-	/* echo $as; */
-	//echo json_encode($arr);
-	//echo json_encode($as);
+/*
+ *  将工作日加班时间和站点，以及周末站点查询出，以便于前端界面初步加载
+ */
+header ( 'content-type:text/html;charset=utf-8' );
+require 'dbaccess.php';
+$DB = new DB ();
+
+/**
+ * *******************加班时间查询*************************************
+ */
+$linktime = "SELECT FTime FROM t_hs_bustime where FBusID='7'";
+$restime = $DB->execsql ( $linktime );
+
+/**
+ * *******************工作日班车站点查询*************************************
+ */
+$linkBS = "SELECT distinct a.FName FROM t_hs_stop as a inner join t_hs_busline_stop as b on a.FID=b.FStopID where (b.FBusID='7' OR b.FBusID='8' OR b.FBusID='9') ";
+$resBS = $DB->execsql ( $linkBS );
+
+/**
+ * *******************周末班车站点查询*************************************
+ */
+$linkBS_weekend = "SELECT a.FName FROM t_hs_stop as a inner join t_hs_busline_stop as b on a.FID=b.FStopID where b.FBusID='10'";
+$resBS_weekend = $DB->execsql ( $linkBS_weekend );
+
+$chushi = array (
+		'addtime' => $restime,
+		'addBS' => $resBS,
+		'addBS_weekend'=>$resBS_weekend
+);
+echo json_encode ( $chushi );
 	
