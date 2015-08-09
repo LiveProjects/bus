@@ -1,8 +1,8 @@
 <?php
-require '../non_get/dbaccess.php';
 /**
  * *****************预约修改******************
  */
+require '../non_get/dbaccess.php';
 if(isset($_SESSION['emp_number'])){
 	$BTime = $_GET ['fixtime']; // 修改后的预约时间
 	$FStop = $_GET ['fixpark']; // 修改后的下车站点
@@ -14,7 +14,6 @@ if(isset($_SESSION['emp_number'])){
 	if ($data_hour >= 17) {
 		die ( '3' ); // 请在每天下午5点之前修改预约
 	} else {
-	
 		if (isset ( $BTime )  && isset ( $FStop )) {
 			if (isset ( $FRDate ) ) {
 				$db = new DB ();

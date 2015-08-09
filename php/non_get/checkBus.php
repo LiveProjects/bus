@@ -1,11 +1,10 @@
 <?php
-/*
+/**
  * 查看预约班车记录的页面
  */
 header ( 'content-type:text/html;charset=utf-8' );
 require 'dbaccess.php';
 session_start ();
-
 if (isset ( $_SESSION ['emp_number'] ) && isset ( $_SESSION ['Company'] ) && isset ( $_SESSION ['Section'] )) {
 	$emp_num = $_SESSION ['emp_number'];
 	$db = new DB ();
@@ -37,7 +36,7 @@ if (isset ( $_SESSION ['emp_number'] ) && isset ( $_SESSION ['Company'] ) && iss
 			break;
 	}
 	$from = date ( 'Y-m-d', $currentdate ) . " 00:00:00"; // 查询的起始日期
-	/**
+	/*
 	 * ****************预约查看*********************
 	 */
 	// 查找当天之后的预约记录
