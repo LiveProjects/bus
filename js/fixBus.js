@@ -6,7 +6,8 @@ window.onload=function(){
     gl={
         adddate:document.getElementById("fixdate").lastElementChild,
         addtimeUl:document.getElementById("fixtime").lastElementChild,
-        parkOl:document.getElementById("fixname").lastElementChild,
+        parkOl:document.getElementById("fixname").lastElementChild.previousElementSibling,
+        parkUl:document.getElementById("fixname").lastElementChild,
         parkListul:document.getElementById("parkListul"),
         needname:sessionStorage.getItem('name'),
         downadddate:document.getElementById("adddateval"),
@@ -27,7 +28,7 @@ window.onload=function(){
 
             var datecur=year+"-"+month+"-"+(day);
             //gl.upadddateval.innerHTML=datecur;
-            for(;num<=7;num++){
+            for(;num<=6;num++){
                 var colorSE=Math.floor(Math.random()*4);
                 var li=document.createElement("li");
                 var txt=document.createTextNode(year+"-"+month+"-"+(day++));
@@ -81,6 +82,7 @@ window.onload=function(){
             gl.addtimeUl.appendChild(gl.addtimefragment);
             /* 添加班车下车地点 */
             var spot=data['addBS'];
+            var spotweek=data['addBS_weekend'];
             var parkListulfrag=document.createDocumentFragment();
             spot.forEach(function(item,index){
                 //console.log(item['FName']);
@@ -90,6 +92,16 @@ window.onload=function(){
                 parkListulfrag.appendChild(li);
             });
             gl.parkListul.appendChild(parkListulfrag);
+
+            var parkListulfragweek=document.createDocumentFragment();
+            spotweek.forEach(function(item,index){
+                //console.log(item['FName']);
+                var li=document.createElement("li");
+                var txt=document.createTextNode(item['FName']);
+                li.appendChild(txt);
+                parkListulfragweek.appendChild(li);
+            });
+            gl.parkUl.appendChild(parkListulfragweek);
 
             /* 设置用户常用下车地点*/
             //alert(spot[0]['FName']);
@@ -166,17 +178,54 @@ window.onload=function(){
 //    });
 
     /*时间委托部分以后用原生js代替*/
-    $("#fixdate ul").delegate('li','click',function(){
+    /*$("#fixdate ul").delegate('li','click',function(){
         var valdate=$(this).text();
         //alert(valdate);
         $(this).parent().prev().find("b").text(valdate);
+    });*/
+    $("#fixdate ul").delegate('li','click',function(){
+
+        if($(this).index()!=$("#fixdate ul li").length-1){
+            var valdate=$(this).text();
+            //alert(valdate);
+            $(this).parent().prev().find("b").text(valdate);
+            //$("#addtimeval").text("7:30");
+            $("#addtimeval").text($("#fixtime ul li").eq(0).text());
+            $("#fixtime").find("ul").css('visibility','visible');
+            $("#fixname ol").show();
+            $("#fixname ul").hide();
+
+            $("#fixname").find("b").text($("#fixname ol li").eq(0).text());
+        }else if($(this).index()==$("#fixdate ul li").length-1){
+            var valdate=$(this).text();
+            $("#addtimeval").text("无加班时间项");
+            $("#fixtime").find("ul").css('visibility','hidden');
+
+            $("#fixname ol").hide();
+            $("#fixname ul").show();
+
+            $("#fixname").find("b").text($("#fixname ul li").eq(0).text());
+
+        }
     });
     $("#fixtime ul").delegate('li','click',function(){
         var valtime=$(this).text();
         //alert(valdate);
         $(this).parent().prev().find("b").text(valtime);
     });
+    $("#park ol").delegate('li','click',function(){
+        if($(this).text()!='其他'){
+            var valpark=$(this).text();
+            $(this).parent().prev().find("b").text(valpark);
+        }
+    });
     $("#fixname ol").delegate('li','click',function(){
+        if($(this).text()!='其他'){
+            var valpark=$(this).text();
+            $(this).parent().prev().find("b").text(valpark);
+        }
+    });
+    $("#fixname ul").delegate('li','click',function(){
         if($(this).text()!='其他'){
             var valpark=$(this).text();
             $(this).parent().prev().find("b").text(valpark);
@@ -208,17 +257,22 @@ window.onload=function(){
             Type:'POST',
             data:{
                 //四个值:姓名，加班日期、时间、下车地点+修改前的预约日期
-            	'FRDate':sessionStorage.getItem('fixdate'),
-                'fixname':sessionStorage.getItem('name'),
-                'fixdate':gl.downadddate.innerText,
-                'fixtime':gl.downaddtime.innerText,
+            	//'FRDate':sessionStorage.getItem('fixdate'),
+                //'fixname':sessionStorage.getItem('name'),
+                'FRDate':gl.downadddate.innerText,
+                'fixtime':function() {
+                    if (gl.downaddpark.innerHTML == '无加班时间项') {
+                        return '无加班时间项';
+                    } else {
+                        return gl.downaddpark.innerHTML;
+                    }
+                },
                 'fixpark':gl.downaddpark.innerText
             },
             beforeSend:function(){
-                alert("---提交的数据为------"+gl.downadddate.innerText+gl.downaddtime.innerText+gl.downaddpark.innerText)
+                //alert("---提交的数据为------"+gl.downadddate.innerText+gl.downaddtime.innerText+gl.downaddpark.innerText)
             },
             success:function(data){
-//                alert(data);
                 console.log(data);
                 if(data==1){
                 	alert("修改成功");

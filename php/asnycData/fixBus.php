@@ -3,6 +3,7 @@
  * *****************预约修改******************
  */
 require '../non_get/dbaccess.php';
+session_start();
 if(isset($_SESSION['emp_number'])){
 	$BTime = $_GET ['fixtime']; // 修改后的预约时间
 	$FStop = $_GET ['fixpark']; // 修改后的下车站点

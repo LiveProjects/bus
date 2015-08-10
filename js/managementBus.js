@@ -58,7 +58,7 @@ window.onload=function(){
     })();*/
 
 
-   function createLink(){//函数声明
+    function createLink(){//函数声明
 
         if(window.ActiveXObject){
             var newRequest = new ActiveXObject("Microsoft.XMLHTTP");
@@ -117,6 +117,8 @@ window.onload=function(){
                 	var resdata=JSON.parse(http_request.responseText);
                 	var responselen=resdata['check'].length;
                 	var rescpm=resdata['company'];
+                    console.log("------manage------");
+                    console.log(resdata);
                 	gl.factoryval.value=rescpm['name_com'];
                 	gl.manameinput.value=rescpm['name_emp'];
 
@@ -126,12 +128,12 @@ window.onload=function(){
                     		var li=
                                 "<li>"+
         		                    "<div>"+
-        		                        "<label for=''>下车地点  <input type='text' value='"+resdata['check'][i]['FStop']+"'" +" disabled/></label>"+"<span>"+resdata['check'][i]['book_name']+"</span>"+
+        		                        "<label for=''>下车地点  <input type='text' value='"+resdata['check'][i]['FStop']+"'" +" disabled/></label>"/*+"<span>"+resdata['check'][i]['book_name']+"</span>"*/+
         		                    "</div>"+
         		                    "<span>"+
         		                        "<div>"+
         		                            "<i>加班时间</i>"+
-        		                            "<p>"+ resdata['check'][i]['FRTime'] +"</p>"+
+        		                            "<p>"+ resdata['check'][i]['book_name'] +"</p>"+
         		                        "</div>"+
         		                        "<div>"+
         		                            "<i>加班日期</i>"+
@@ -165,11 +167,11 @@ window.onload=function(){
                  Type:'POST',
                  dataType:'text',
                  beforeSend:function(){
-                     alert("要删除的日期是"+that.parent().parent().prev().find("div:last-child").find("p").text());
+                     //alert("要删除的日期是"+that.parent().parent().prev().find("div:last-child").find("p").text());
                  },
                  data:{
                  		//姓名+加班日期
-                     'name':gl.manameinput.value,
+                     //'name':gl.manameinput.value,
                      'FRDate':that.parent().parent().prev().find("div:last-child").find("p").text()
                  },
                  success:function(data){
@@ -190,6 +192,38 @@ window.onload=function(){
         }
     });
 
+    /*用户名 工厂部门*/
+    $.ajax({
+        url:'php/asnycData/ForBookbusAsnyc.php',
+        dataType:'json',
+        Type:'POST',
+        data:{
+            //"firstname":data
+        },
+        beforeSend:function(){
+            //
+        },
+        success:function(data){
+
+            console.log("--1--");
+            console.log(data);
+
+            console.log("---company--");
+            var company=data['Company'];
+            //gl.factory.setAttribute('disabled','disabled');
+            gl.factoryval.value=company+data['Section'];
+            gl.manameinput.value=data['name'];
+
+            //console.log(data);
+        },
+        error:function(err){
+            alert(err.status);
+        },
+        complete:function(){
+            //console.log("OK");
+        }
+    });
+
     /*修改数据*/
     $("#mainShow ul").delegate("li b:last-child button",'click',function(){
         /*确定用户数据*/
@@ -198,14 +232,14 @@ window.onload=function(){
         sessionStorage.setItem('name',$("#maname").find("input").val());
 
         sessionStorage.setItem('date',$(this).parent().parent().prev().find("div:last-child").find("p").text());
-        alert("临时数据为"+sessionStorage.getItem('name')+sessionStorage.getItem('date'));
+        //alert("临时数据为"+sessionStorage.getItem('name')+sessionStorage.getItem('date'));
 
         /*初始填充值*/
         sessionStorage.setItem('fixdate',$(this).parent().parent().prev().find("div:last-child").find("p").text());
         sessionStorage.setItem('fixtime',$(this).parent().parent().prev().find("div:first-child").find("p").text());
         sessionStorage.setItem('fixadd',$(this).parent().parent().parent().children("div").find("input").val());
 
-        alert("初始化的数据为:"+sessionStorage.getItem('fixdate')+sessionStorage.getItem('fixtime')+sessionStorage.getItem('fixadd'));
+        //alert("初始化的数据为:"+sessionStorage.getItem('fixdate')+sessionStorage.getItem('fixtime')+sessionStorage.getItem('fixadd'));
 
         location.href="fixBus.html";
 

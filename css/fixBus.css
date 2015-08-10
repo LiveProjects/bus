@@ -146,6 +146,27 @@ body {
 #fixname ol li:active {
   background-color: deeppink;
 }
+#fixname ul {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0 10px 0 0;
+  background-color: white;
+  display: none;
+}
+#fixname ul li {
+  width: 25%;
+  height: 36px;
+  min-width: 60px;
+  list-style: none;
+  float: left;
+  text-align: center;
+  line-height: 36px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+#fixname ul li:active {
+  background-color: deeppink;
+}
 #parkList {
   position: absolute;
   width: 100px;
