@@ -22,6 +22,6 @@ foreach ( $res_busline as $key => $value ) {
 	} 
 	$res_busline [$key] ['stop'] = $stop;
 }
-print_r($res_busline);
-echo '<hr/>';
+/*print_r($res_busline);
+echo '<hr/>';*/
 echo json_encode ( $res_busline );
