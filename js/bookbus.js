@@ -319,7 +319,8 @@ window.onload=function(){
             var valdate=$(this).text();
             //alert(valdate);
             $(this).parent().prev().find("b").text(valdate);
-            //$("#addtimeval").text("7:30");
+
+            $("#addtimeval").text($("#addtime ul li").eq(0).text());
             $("#addtime").find("ul").css('visibility','visible');
             $("#park ol").show();
             $("#park ul").hide();
