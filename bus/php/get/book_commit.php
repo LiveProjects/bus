@@ -2,7 +2,7 @@
 /*
  * 构造预约记录的数据结构，将预约记录提交到数据表t_hs_overwork_reserv
  */
-require '../non_get/dbaccess.php';
+require '../../../common/php/dbaccess.php';
 session_start ();
 if (! isset ( $_SESSION ['emp_number'] )) {
 	echo 0; // 预约失败，请联系技术支持
@@ -17,6 +17,9 @@ if (! isset ( $_SESSION ['emp_number'] )) {
 		echo 2; // 请检查空项
 		die ();
 	} else {
+		if ($FRTime=='无加班时间项'){
+			$FRTime=NULL;
+		}
 		$week = date ( 'w', strtotime ( $FRDate ) );
 		// echo "haha".$week."hah";
 		switch ($week) {

@@ -73,7 +73,7 @@ window.onload=function(){
         //发送请求
         var http_request = createLink();//创建一个ajax对象
         if(http_request){
-            var url='php/non_get/checkBus.php';
+            var url='../php/non_get/check_bookbus.php';
 
             //var arr={'name':'lio','age':'123'};
 
@@ -133,7 +133,7 @@ window.onload=function(){
         		                    "<span>"+
         		                        "<div>"+
         		                            "<i>加班时间</i>"+
-        		                            "<p>"+ resdata['check'][i]['book_name'] +"</p>"+
+        		                            "<p>"+ resdata['check'][i]['FRTime'] +"</p>"+
         		                        "</div>"+
         		                        "<div>"+
         		                            "<i>加班日期</i>"+
@@ -163,7 +163,7 @@ window.onload=function(){
         confirm_=confirm("确定删除此预约记录？");
         if(confirm){
         	 $.ajax({
-                 url:'php/asnycData/delBus.php',
+                 url:'../php/get/delBus.php',
                  Type:'POST',
                  dataType:'text',
                  beforeSend:function(){
@@ -194,7 +194,7 @@ window.onload=function(){
 
     /*用户名 工厂部门*/
     $.ajax({
-        url:'php/asnycData/ForBookbusAsnyc.php',
+        url:'../php/non_get/company_section.php',
         dataType:'json',
         Type:'POST',
         data:{

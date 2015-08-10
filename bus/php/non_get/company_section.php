@@ -3,7 +3,7 @@
  * 根据职员编号查询职员的姓名及所在的公司和部门,并将部门和公司存入session中
  */
 header ( 'content-type:text/html;charset=utf-8' );
-require '../non_get/dbaccess.php';
+require '../../../common/php/dbaccess.php';
 $db = new DB ();
 session_start ();
 // $emp_num='0001';

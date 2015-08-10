@@ -3,7 +3,7 @@
  *  将工作日加班时间和站点，以及周末站点查询出，以便于前端界面初步加载
  */
 header ( 'content-type:text/html;charset=utf-8' );
-require 'dbaccess.php';
+require '../../../common/php/dbaccess.php';
 $DB = new DB ();
 
 /*

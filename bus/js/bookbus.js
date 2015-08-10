@@ -61,7 +61,7 @@ window.onload=function(){
     /********加载初始化的数据*******************************/
 
     $.ajax({
-        url:'php/non_get/json.php',
+        url:'../php/non_get/overwork_time_stop.php',
         dataType:'json',
         Type:'POST',
         success:function(data){
@@ -254,7 +254,7 @@ window.onload=function(){
     },false);*/
     /*用户名 工厂部门*/
     $.ajax({
-        url:'php/asnycData/ForBookbusAsnyc.php',
+        url:'../php/non_get/company_section.php',
         dataType:'json',
         Type:'POST',
         data:{
@@ -381,7 +381,7 @@ window.onload=function(){
         e.cancelBubble=true;
         
         $.ajax({
-        	url:'php/asnycData/book_commit.php',
+        	url:'../php/get/book_commit.php',
         	dataType:'',
         	Type:'POST',
         	data:{

@@ -22,7 +22,7 @@ $(document).ready(function(){
 
     /*工作日常规班车查询数据获取*/
     $.ajax({
-        url:'php/non_get/check_regular.php',
+        url:'../php/non_get/check_regular.php',
         dataType:'json',
         Type:'POST',
         success:function(data){
@@ -77,7 +77,7 @@ $(document).ready(function(){
 
     /*工作日加班车查询*/
     $.ajax({
-        url:'php/non_get/check_overwork.php',
+        url:'../php/non_get/check_overwork.php',
         dataType:'json',
         Type:'POST',
         success:function(data){
@@ -86,7 +86,7 @@ $(document).ready(function(){
             data.forEach(function(item,index){
                 console.log(data[index]['FName']);
                 var tr="<tr>"+
-                            "<td>"+data[index]['FID']+"</td>"+
+                            "<td>"+data[index]['FName']+"</td>"+
                             "<td>"+data[index]['route']+"</td>"+
                             "<td>"+addpark(data[index]['stop'])+"</td>"+
                             "<td>"+addTime(data[index]['time'])+"</td>"+
@@ -104,7 +104,7 @@ $(document).ready(function(){
 
     /*周末加班车查询*/
     $.ajax({
-        url:'php/non_get/check_weekend.php',
+        url:'../php/non_get/check_weekend.php',
         dataType:'json',
         Type:'POST',
         success:function(data){

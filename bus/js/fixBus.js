@@ -55,7 +55,7 @@ window.onload=function(){
 
     /********加载初始化的数据*******************************/
     $.ajax({
-        url:'php/non_get/json.php',
+        url:'../php/non_get/overwork_time_stop.php',
         dataType:'json',
         Type:'POST',
         success:function(data){
@@ -252,7 +252,7 @@ window.onload=function(){
 
     gl.subfixbtn.onclick=function(){
         $.ajax({
-            url:'php/asnycData/fixBus.php',
+            url:'../php/get/fixBus.php',
             dataType:'',
             Type:'POST',
             data:{
@@ -261,10 +261,10 @@ window.onload=function(){
                 //'fixname':sessionStorage.getItem('name'),
                 'FRDate':gl.downadddate.innerText,
                 'fixtime':function() {
-                    if (gl.downaddpark.innerHTML == '无加班时间项') {
+                    if (gl.downaddtime.innerHTML == '无加班时间项') {
                         return '无加班时间项';
                     } else {
-                        return gl.downaddpark.innerHTML;
+                        return gl.downaddtime.innerHTML;
                     }
                 },
                 'fixpark':gl.downaddpark.innerText

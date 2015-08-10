@@ -3,7 +3,7 @@
  * 查看预约班车记录的页面
  */
 header ( 'content-type:text/html;charset=utf-8' );
-require 'dbaccess.php';
+require '../../../common/php/dbaccess.php';
 session_start ();
 if (isset ( $_SESSION ['emp_number'] ) && isset ( $_SESSION ['Company'] ) && isset ( $_SESSION ['Section'] )) {
 	$emp_num = $_SESSION ['emp_number'];
@@ -40,10 +40,10 @@ if (isset ( $_SESSION ['emp_number'] ) && isset ( $_SESSION ['Company'] ) && iss
 	 * ****************预约查看*********************
 	 */
 	// 查找当天之后的预约记录
-	$sql_check = "select FStopID as FStop,FRDate,FRTime as book_name from t_hs_overwork_reserv where FNumber='{$_SESSION['emp_number']}' and FRDate>='{$from}' order by 'FRDate' desc";
+	$sql_check = "select FStopID as FStop,FRDate,FRTime from t_hs_overwork_reserv where FNumber='{$_SESSION['emp_number']}' and FRDate>='{$from}' order by 'FRDate' desc";
 // 	echo $sql_check;die;
 	$res_check = $db->execsql ( $sql_check );
-	// var_dump($res_check);
+// 	var_dump($res_check);die;
 	$num = count ( $res_check );
 	if ($num) {
 		for($i = 0; $i < $num; $i ++) {
@@ -54,6 +54,9 @@ if (isset ( $_SESSION ['emp_number'] ) && isset ( $_SESSION ['Company'] ) && iss
 			$data = explode ( ' ', $res_check [$i] ['FRDate'] );
 			// var_dump($data);
 			$res_check [$i] ['FRDate'] = $data [0];
+			if ($res_check[$i]['FRTime']==NULL){
+				$res_check[$i]['FRTime']='无加班时间项';
+			} 
 		}
 	}
 	// 将查到的公司信息与职员的预约记录以JSON格式输出
@@ -62,6 +65,7 @@ if (isset ( $_SESSION ['emp_number'] ) && isset ( $_SESSION ['Company'] ) && iss
 			'section' => $_SESSION ['Section'],
 			'check' => $res_check 
 	);
+// 	var_dump($check_data);die;
 	$checkjson = json_encode ( $check_data );
 	echo $checkjson;
 }
