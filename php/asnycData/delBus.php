@@ -15,7 +15,7 @@ if (isset ( $_SESSION ['emp_number'] )) {
 	} else {
 		$BDate = $_GET ['FRDate'] . ' 00:00:00';
 		/* $FID = $_GET ['FRDate']; */
-		if (isset ( $FName ) && isset ( $BDate )) {			
+		if (isset ( $BDate )) {			
 			$sql_del = "delete From t_hs_overwork_reserv where FNumber='{$emp_num}' and FRDate='{$BDate}'";
 			/* $sql_del = "delete t_hs_overwork_reserv where FID='{$FID}' "; */
 			$res_del = $db->execsql ( $sql_del );

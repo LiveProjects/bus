@@ -1,12 +1,12 @@
 <?php
-/*
+/**
  * 判断用户是否已在PC端绑定，并根据微信ID将职员编号取出，保存到session中
  */
 require 'dbaccess.php';
 $db = new DB ();
 session_start ();
 // 获取微信ID
-$openid = '0001';
+$openid = '0002';
 // 判断微信是否已确认绑定
 $sql_type = "select FType,FNumber from t_hs_wechat where FWechatID='{$openid}'";
 $res_type = $db->getrow ( $sql_type );
