@@ -2,7 +2,7 @@
 /*
  * *****************预约删除******************
  */
-require '../non_get/dbaccess.php';
+require '../../../common/php/dbaccess.php';
 $db = new DB ();
 session_start ();
 

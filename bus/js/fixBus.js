@@ -316,6 +316,8 @@ window.onload=function(){
         })
     };
 
+    $("#fixtime ul").hide();
+
 
 
 

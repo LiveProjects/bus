@@ -162,9 +162,9 @@ window.onload=function(){
     });
 
     if(localStorage.getItem('usuallytime')){
-        gl.upaddtimeval.innerText=localStorage.getItem('usuallytime');
+        //gl.upaddtimeval.innerText=localStorage.getItem('usuallytime');
     }else{
-//        gl.upaddtimeval.innerText=gl.addtimeUl.firstElementChild.innerText;
+        //gl.upaddtimeval.innerText=gl.addtimeUl.firstElementChild.innerText;
     }
 
     if(localStorage.getItem('usually0')){
