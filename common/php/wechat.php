@@ -2,7 +2,7 @@
 /**
  * 判断用户是否已在PC端绑定，并根据微信ID将职员编号取出，保存到session中
  */
-require 'dbaccess.php';
+require_once 'dbaccess.php';
 $db = new DB ();
 session_start ();
 // 获取微信ID

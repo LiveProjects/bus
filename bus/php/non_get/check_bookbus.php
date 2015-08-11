@@ -3,7 +3,7 @@
  * 查看预约班车记录的页面
  */
 header ( 'content-type:text/html;charset=utf-8' );
-require '../../../common/php/dbaccess.php';
+require_once '../../../common/php/dbaccess.php';
 session_start ();
 if (isset ( $_SESSION ['emp_number'] ) && isset ( $_SESSION ['Company'] ) && isset ( $_SESSION ['Section'] )) {
 	$emp_num = $_SESSION ['emp_number'];

@@ -2,7 +2,7 @@
 /*
  * 构造预约记录的数据结构，将预约记录提交到数据表t_hs_overwork_reserv
  */
-require '../../../common/php/dbaccess.php';
+require_once '../../../common/php/dbaccess.php';
 session_start ();
 if (! isset ( $_SESSION ['emp_number'] )) {
 	echo 0; // 预约失败，请联系技术支持
