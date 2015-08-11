@@ -36,7 +36,7 @@ window.onload=function(){
                 li.style.backgroundColor=gl.randomcolor()[colorSE];
                 datefra.appendChild(li);
             }
-            gl.adddate.appendChild(datefra);
+            //gl.adddate.appendChild(datefra);
 
         },
         addtimefragment:document.createDocumentFragment()
@@ -196,8 +196,11 @@ window.onload=function(){
             $("#fixname ul").hide();
 
             $("#fixname").find("b").text($("#fixname ol li").eq(0).text());
+            $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+            $(this).siblings().css('box-shadow','none');
         }else if($(this).index()==$("#fixdate ul li").length-1){
             var valdate=$(this).text();
+            $(this).parent().prev().find("b").text(valdate);
             $("#addtimeval").text("无加班时间项");
             $("#fixtime").find("ul").css('visibility','hidden');
 
@@ -205,6 +208,8 @@ window.onload=function(){
             $("#fixname ul").show();
 
             $("#fixname").find("b").text($("#fixname ul li").eq(0).text());
+            $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+            $(this).siblings().css('box-shadow','none');
 
         }
     });
@@ -212,29 +217,39 @@ window.onload=function(){
         var valtime=$(this).text();
         //alert(valdate);
         $(this).parent().prev().find("b").text(valtime);
+        $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+        $(this).siblings().css('box-shadow','none');
     });
     $("#park ol").delegate('li','click',function(){
         if($(this).text()!='其他'){
             var valpark=$(this).text();
             $(this).parent().prev().find("b").text(valpark);
+            $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+            $(this).siblings().css('box-shadow','none');
         }
     });
     $("#fixname ol").delegate('li','click',function(){
         if($(this).text()!='其他'){
             var valpark=$(this).text();
             $(this).parent().prev().find("b").text(valpark);
+            $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+            $(this).siblings().css('box-shadow','none');
         }
     });
     $("#fixname ul").delegate('li','click',function(){
         if($(this).text()!='其他'){
             var valpark=$(this).text();
             $(this).parent().prev().find("b").text(valpark);
+            $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+            $(this).siblings().css('box-shadow','none');
         }
     });
     $("#parkList ul").delegate('li','click',function(){
         var valparkList=$(this).text();
         //alert(valdate);
         $("#parkval").text(valparkList);
+        $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+        $(this).siblings().css('box-shadow','none');
     });
 
     $("#fixname ol").delegate('li#showParklist','click',function(e){
@@ -242,6 +257,8 @@ window.onload=function(){
         e.stopPropagation();
         e.cancelBubble=true;
         $("#parkList").addClass("showlist");
+        $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+        $(this).siblings().css('box-shadow','none');
     });
     /*隐藏边栏*/
     document.onclick=function(){
@@ -277,6 +294,14 @@ window.onload=function(){
                 if(data==1){
                 	alert("修改成功");
                 	window.location.href='managementBus.html';
+
+                    $("#addtime ul li").css('box-shadow','none');
+                    $("#park ul li").css('box-shadow','none');
+                    $("#park ol li").css('box-shadow','none');
+
+                    $("#addtime b").text("");
+                    $("#park b").text("");
+
                 }else if(data==0){
                 	alert("修改失败，请联系技术支持");
                 }else if(data==3){

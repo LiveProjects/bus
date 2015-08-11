@@ -277,7 +277,7 @@ window.onload=function(){
             //console.log(data);
         },
         error:function(err){
-          alert(err.status);
+          //alert(err.status);
         },
         complete:function(){
             //console.log("OK");
@@ -319,15 +319,17 @@ window.onload=function(){
             var valdate=$(this).text();
             //alert(valdate);
             $(this).parent().prev().find("b").text(valdate);
-
             $("#addtimeval").text($("#addtime ul li").eq(0).text());
             $("#addtime").find("ul").css('visibility','visible');
             $("#park ol").show();
             $("#park ul").hide();
 
             $("#park").find("b").text($("#park ol li").eq(0).text());
+            $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+            $(this).siblings().css('box-shadow','none');
         }else if($(this).index()==$("#adddate ul li").length-1){
             var valdate=$(this).text();
+            $(this).parent().prev().find("b").text(valdate);
             $("#addtimeval").text("无加班时间项");
             $("#addtime").find("ul").css('visibility','hidden');
 
@@ -335,6 +337,8 @@ window.onload=function(){
             $("#park ul").show();
 
             $("#park").find("b").text($("#park ul li").eq(0).text());
+            $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+            $(this).siblings().css('box-shadow','none');
 
         }
     });
@@ -345,27 +349,37 @@ window.onload=function(){
         var valtime=$(this).text();
         //alert(valdate);
         $(this).parent().prev().find("b").text(valtime);
+        $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+        $(this).siblings().css('box-shadow','none');
     });
     $("#park ol").delegate('li','click',function(){
         if($(this).text()!='其他'){
             var valpark=$(this).text();
             $(this).parent().prev().find("b").text(valpark);
+            $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+            $(this).siblings().css('box-shadow','none');
         }
     });
     $("#park ul").delegate('li','click',function(){
         var valpark=$(this).text();
         $(this).parent().parent().find("b").text(valpark);
+        $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+        $(this).siblings().css('box-shadow','none');
     });
     $("#parkList ul").delegate('li','click',function(){
         var valparkList=$(this).text();
         //alert(valdate);
         $("#parkval").text(valparkList);
+        $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+        $(this).siblings().css('box-shadow','none');
     });
 
     $("#park ol").delegate('li#showParklist','click',function(e){
         //alert(13);
         e.stopPropagation();
         e.cancelBubble=true;
+        $(this).css('box-shadow','0 0 2px 4px #245269 inset');
+        $(this).siblings().css('box-shadow','none');
         $("#parkList").addClass("showlist");
     });
     /*隐藏边栏*/
@@ -408,6 +422,14 @@ window.onload=function(){
                 if(data==1){
                 	alert("预约成功");
                     localStorage.setItem('usuallytime',gl.upaddtimeval.innerText);
+
+                    $("#addtime ul li").css('box-shadow','none');
+                    $("#park ul li").css('box-shadow','none');
+                    $("#park ol li").css('box-shadow','none');
+
+                    $("#addtime b").text("");
+                    $("#park b").text("");
+
                 }else if(data==2){
                 	alert("请检查空项");
                 }else{
