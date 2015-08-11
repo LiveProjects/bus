@@ -316,7 +316,7 @@ window.onload=function(){
         })
     };
 
-    $("#fixtime ul").hide();
+    //$("#fixtime ul").hide();
 
 
 
