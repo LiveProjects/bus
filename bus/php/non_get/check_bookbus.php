@@ -44,8 +44,8 @@ if (isset ( $_SESSION ['emp_number'] ) && isset ( $_SESSION ['Company'] ) && iss
 	// 查找当天之后的预约记录
 	$from = date ( 'Y-m-d', time () ) . " 00:00:00";
 // 	echo $from;die;
-	$sql_check = "select FStopID as FStop,FRDate,FRTime from t_hs_overwork_reserv where FNumber='{$_SESSION['emp_number']}' and FRDate>='{$from}' order by 'FRDate' desc";
-	// echo $sql_check;die;
+	$sql_check = "select FStopID as FStop,FRDate,FRTime from t_hs_overwork_reserv where FNumber='{$_SESSION['emp_number']}' and FRDate>='{$from}' order by FRDate desc";
+// 	echo $sql_check;die;
 	$res_check = $db->execsql ( $sql_check );
 	// var_dump($res_check);die;
 	$num = count ( $res_check );
