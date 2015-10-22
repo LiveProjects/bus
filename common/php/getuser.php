@@ -18,7 +18,7 @@ if(isset($_COOKIE[$cookie_name])){
 
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); 
 	$a=curl_exec($ch);
 	$strjson=json_decode($a);
 	$openid=$strjson->openid;
